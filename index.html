@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0b0b0d" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="format-detection" content="telephone=no" />
+<title>YD Gains · Gold's Gym Training Split</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --gold:#d4af37;
+    --gold-soft:#e8c860;
+    --bg:#0b0b0d;
+    --bg-2:#141418;
+    --card:#1b1b21;
+    --card-2:#22222a;
+    --line:#2c2c35;
+    --text:#f4f4f5;
+    --muted:#a1a1aa;
+    --green:#3fb950;
+    --shadow:0 18px 40px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  body{
+    background:radial-gradient(1200px 600px at 50% -10%, #1a1a20 0%, var(--bg) 55%);
+    color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;
+    min-height:100vh;
+    padding-bottom:calc(60px + env(safe-area-inset-bottom));
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.brand,.tab-btn,.daytag,.exnum{font-family:'Oswald',sans-serif;letter-spacing:.5px}
+
+  /* ---------- Header ---------- */
+  header{
+    text-align:center;
+    padding:42px 20px 26px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg, rgba(212,175,55,.06), transparent);
+  }
+  .brand{
+    font-size:clamp(34px,6vw,58px);
+    font-weight:700;
+    text-transform:uppercase;
+    line-height:1;
+  }
+  .brand span{color:var(--gold)}
+  .tagline{color:var(--muted);margin-top:10px;font-size:14px;letter-spacing:2px;text-transform:uppercase}
+  .stats{
+    display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px;
+  }
+  .chip{
+    background:var(--card);border:1px solid var(--line);border-radius:999px;
+    padding:7px 16px;font-size:13px;color:var(--muted);
+  }
+  .chip b{color:var(--gold-soft);font-weight:600}
+
+  /* ---------- Tabs ---------- */
+  .tabs{
+    position:sticky;top:0;z-index:20;
+    display:flex;gap:6px;justify-content:center;flex-wrap:wrap;
+    padding:14px 14px;
+    padding-top:calc(14px + env(safe-area-inset-top));
+    background:rgba(11,11,13,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .tab-btn{
+    cursor:pointer;border:1px solid var(--line);background:var(--card);
+    color:var(--muted);border-radius:12px;padding:10px 16px;
+    font-size:15px;font-weight:600;text-transform:uppercase;
+    transition:.18s ease;min-width:104px;text-align:center;line-height:1.2;
+  }
+  .tab-btn small{display:block;font-size:11px;font-family:'Inter';letter-spacing:.5px;opacity:.7;font-weight:500}
+  .tab-btn:hover{border-color:var(--gold);color:var(--text);transform:translateY(-1px)}
+  .tab-btn.active{
+    background:linear-gradient(180deg,var(--gold),#b8932b);
+    color:#1a1a1a;border-color:var(--gold);box-shadow:0 6px 18px rgba(212,175,55,.3);
+  }
+  .tab-btn.active small{opacity:.85}
+
+  /* ---------- Day content ---------- */
+  .wrap{max-width:1080px;margin:0 auto;padding:30px 18px 0}
+  .day-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+  .daytag{
+    font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;
+    color:#1a1a1a;background:var(--gold);padding:5px 12px;border-radius:8px;
+  }
+  .day-title{font-size:clamp(26px,4vw,38px);font-weight:700;text-transform:uppercase}
+  .day-focus{color:var(--muted);margin:4px 0 26px;font-size:15px}
+
+  .section-label{
+    display:flex;align-items:center;gap:12px;margin:34px 0 16px;
+    font-family:'Oswald';font-size:20px;text-transform:uppercase;letter-spacing:1px;
+  }
+  .section-label::after{content:"";flex:1;height:1px;background:var(--line)}
+  .section-label .dot{width:9px;height:9px;border-radius:50%;background:var(--gold)}
+
+  /* Warm-up */
+  .warm-intro{
+    background:var(--bg-2);border:1px solid var(--line);border-left:3px solid var(--gold);
+    border-radius:12px;padding:16px 18px;color:var(--muted);font-size:14px;margin-bottom:18px;line-height:1.6;
+  }
+  .warm-intro b{color:var(--text)}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+    transition:.18s ease;display:flex;flex-direction:column;
+  }
+  .card:hover{transform:translateY(-3px);border-color:var(--gold);box-shadow:var(--shadow)}
+  .thumb{
+    height:150px;background:linear-gradient(160deg,#242430,#15151a);
+    display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .thumb svg{width:84%;height:84%}
+  .exnum{
+    position:absolute;top:10px;left:10px;width:30px;height:30px;border-radius:8px;
+    background:var(--gold);color:#1a1a1a;font-weight:700;font-size:15px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .badge{
+    position:absolute;top:10px;right:10px;font-size:10px;letter-spacing:.5px;text-transform:uppercase;
+    background:rgba(0,0,0,.55);color:var(--gold-soft);padding:4px 8px;border-radius:6px;border:1px solid var(--line);
+  }
+  .card-body{padding:15px 16px 17px;display:flex;flex-direction:column;gap:9px;flex:1}
+  .ex-name{font-family:'Oswald';font-size:18px;font-weight:600;line-height:1.2}
+  .ex-target{font-size:12px;color:var(--gold-soft);text-transform:uppercase;letter-spacing:.5px;margin-top:-4px}
+  .ex-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:2px}
+  .pill{
+    background:var(--card-2);border:1px solid var(--line);border-radius:7px;
+    padding:5px 9px;font-size:12px;color:var(--muted);
+  }
+  .pill b{color:var(--text);font-weight:600}
+  .ex-cue{font-size:13px;color:var(--muted);line-height:1.5;margin-top:auto;padding-top:4px}
+  .ex-cue::before{content:"▸ ";color:var(--gold)}
+
+  footer{
+    text-align:center;color:var(--muted);font-size:13px;margin-top:46px;
+    padding:24px 18px 0;border-top:1px solid var(--line);max-width:1080px;margin-left:auto;margin-right:auto;
+  }
+  footer b{color:var(--gold-soft)}
+  .hidden{display:none}
+  @media (max-width:640px){
+    /* Tabs: one swipeable row instead of 3 stacked rows */
+    .tabs{
+      flex-wrap:nowrap;justify-content:flex-start;
+      overflow-x:auto;scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;gap:8px;padding-left:14px;padding-right:14px;
+    }
+    .tabs::-webkit-scrollbar{display:none}
+    .tab-btn{flex:0 0 auto;min-width:84px;scroll-snap-align:center;padding:11px 14px}
+
+    .wrap{padding:24px 14px 0}
+
+    /* Exercises: big single-column rows — image left, details right.
+       Far easier to read at arm's length between sets. */
+    .cards{grid-template-columns:1fr;gap:12px}
+    .card{flex-direction:row;align-items:stretch}
+    .thumb{
+      height:auto;width:108px;flex:0 0 108px;
+      border-bottom:none;border-right:1px solid var(--line);
+    }
+    .thumb svg{width:74%;height:74%}
+    .exnum{width:26px;height:26px;font-size:14px;top:8px;left:8px}
+    .badge{font-size:9px;padding:3px 6px;top:8px;right:8px}
+    .card-body{padding:13px 14px;gap:7px}
+    .ex-name{font-size:18px}
+    .ex-cue{font-size:13px;padding-top:2px}
+    .card:hover{transform:none} /* no hover-lift on touch */
+  }
+  @media (max-width:360px){
+    .thumb{width:86px;flex:0 0 86px}
+    .ex-name{font-size:16px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">YD <span>GAINS</span></div>
+  <div class="tagline">Gold's Gym · 6-Day Push / Legs / Pull</div>
+  <div class="stats">
+    <span class="chip">Lifter: <b>YD</b></span>
+    <span class="chip">Weight: <b>63 kg</b></span>
+    <span class="chip">Height: <b>169 cm</b></span>
+    <span class="chip">Split: <b>PPL ×2</b></span>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs"></nav>
+
+<main class="wrap" id="content"></main>
+
+<footer>
+  Loads are <b>starting suggestions</b> tuned for a 63&nbsp;kg lifter — add weight when all sets feel easy, leaving 1–2 reps in the tank.
+  Always warm up fully and use a spotter on heavy barbell work. Built for YD 💪
+</footer>
+
+<script>
+/* ============================================================
+   SVG ILLUSTRATIONS  (reusable by muscle / movement)
+   ============================================================ */
+const ART = {
+  cardio: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10 60 L30 60 L38 40 L48 75 L58 50 L66 60 L90 60"/><circle cx="50" cy="20" r="8" fill="#d4af37" stroke="none"/></svg>`,
+  mobility: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="50" cy="18" r="8"/><path d="M50 26 L50 55 M50 36 L25 30 M50 36 L75 30 M50 55 L36 82 M50 55 L64 82"/></svg>`,
+  chest: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="48" width="72" height="9" rx="4"/><rect x="6" y="40" width="9" height="25" rx="3"/><rect x="85" y="40" width="9" height="25" rx="3"/><circle cx="50" cy="22" r="8"/><path d="M50 30 L50 48"/></svg>`,
+  incline: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 80 L70 38"/><rect x="28" y="20" width="38" height="9" rx="4"/><circle cx="22" cy="20" r="4" fill="#d4af37" stroke="none"/><circle cx="72" cy="20" r="4" fill="#d4af37" stroke="none"/></svg>`,
+  shoulder: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="50" cy="22" r="8"/><path d="M50 30 L50 62 M50 38 L22 38 M50 38 L78 38"/><circle cx="18" cy="38" r="6" fill="#d4af37" stroke="none"/><circle cx="82" cy="38" r="6" fill="#d4af37" stroke="none"/></svg>`,
+  lateral: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="50" cy="24" r="8"/><path d="M50 32 L50 70 M50 44 L14 56 M50 44 L86 56"/><circle cx="12" cy="58" r="6" fill="#d4af37" stroke="none"/><circle cx="88" cy="58" r="6" fill="#d4af37" stroke="none"/></svg>`,
+  triceps: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M30 18 L30 50 M30 18 L70 18 M30 50 Q30 72 50 72 Q70 72 70 50"/><rect x="38" y="78" width="24" height="8" rx="4"/></svg>`,
+  triceps_oh: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="50" cy="62" r="8"/><path d="M50 54 L50 30 M50 40 L34 40 M50 40 L66 40"/><rect x="40" y="14" width="20" height="8" rx="4"/></svg>`,
+  pecdec: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="50" cy="50" r="9"/><path d="M50 50 L18 26 M50 50 L82 26 M50 50 L18 74 M50 50 L82 74"/></svg>`,
+  dips: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 24 L20 76 M80 24 L80 76"/><circle cx="50" cy="38" r="8"/><path d="M50 46 L50 70 M50 50 L24 44 M50 50 L76 44"/></svg>`,
+  lats: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="16" width="56" height="8" rx="4"/><path d="M28 24 L42 48 M72 24 L58 48"/><circle cx="50" cy="56" r="8"/><path d="M50 64 L50 84"/></svg>`,
+  row: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="28" cy="34" r="8"/><path d="M28 42 L28 64 L60 64 M28 52 L62 52"/><rect x="62" y="46" width="9" height="22" rx="4"/></svg>`,
+  cablerow: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="34" cy="30" r="8"/><path d="M34 38 L34 62 L20 78 M34 50 L72 56"/><path d="M72 56 L86 50" /><rect x="80" y="40" width="8" height="28" rx="3"/></svg>`,
+  facepull: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="50" cy="30" r="8"/><path d="M50 38 L50 66 M50 44 L22 36 M50 44 L78 36 M22 36 L12 30 M78 36 L88 30"/></svg>`,
+  biceps: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M36 78 L36 46 Q36 28 52 28 Q64 28 64 40"/><rect x="44" y="14" width="22" height="8" rx="4"/><circle cx="36" cy="84" r="4" fill="#d4af37" stroke="none"/></svg>`,
+  hammer: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M34 80 L34 48 Q34 30 52 30"/><rect x="46" y="20" width="9" height="26" rx="4"/></svg>`,
+  preacher: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 70 L46 44"/><path d="M46 44 Q56 30 70 36"/><rect x="60" y="26" width="20" height="8" rx="4"/></svg>`,
+  squat: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="20" y="22" width="60" height="8" rx="4"/><circle cx="50" cy="40" r="7"/><path d="M50 47 L50 60 M50 60 L38 80 M50 60 L62 80 M50 54 L38 54 M50 54 L62 54"/></svg>`,
+  legpress: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 78 L40 78 L40 40"/><circle cx="34" cy="34" r="7"/><path d="M40 50 L70 30"/><rect x="66" y="20" width="24" height="9" rx="4"/></svg>`,
+  rdl: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="34" cy="26" r="8"/><path d="M34 34 L52 52 L52 82 M34 34 L34 40"/><rect x="22" y="60" width="44" height="8" rx="4"/></svg>`,
+  legext: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="30" cy="34" r="8"/><path d="M30 42 L30 60 L58 60 L78 40"/><circle cx="80" cy="38" r="6" fill="#d4af37" stroke="none"/></svg>`,
+  legcurl: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M16 44 L60 44 Q78 44 78 62 L62 62"/><circle cx="24" cy="38" r="7"/><circle cx="62" cy="66" r="6" fill="#d4af37" stroke="none"/></svg>`,
+  lunge: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="46" cy="22" r="8"/><path d="M46 30 L46 50 M46 50 L26 78 M46 50 L70 60 L70 80 M46 38 L34 46 M46 38 L58 46"/></svg>`,
+  calf: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M40 16 L40 60 Q40 70 50 70 L50 84 M40 60 L30 84"/><path d="M50 84 L72 84"/></svg>`,
+  hack: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M16 80 L70 30"/><circle cx="46" cy="42" r="7"/><path d="M46 49 L46 62 M46 62 L34 80 M46 62 L58 80"/><rect x="58" y="22" width="22" height="8" rx="4"/></svg>`,
+  pullup: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="16" width="72" height="7" rx="3"/><path d="M38 23 L42 44 M62 23 L58 44"/><circle cx="50" cy="52" r="8"/><path d="M50 60 L50 82"/></svg>`,
+  strarm: `<svg viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="18" width="56" height="7" rx="3"/><circle cx="50" cy="62" r="8"/><path d="M50 54 L36 26 M50 54 L64 26 M50 62 L50 84"/></svg>`,
+};
+
+/* ============================================================
+   WORKOUT DATA
+   ============================================================ */
+const WARMUPS = {
+  push: {
+    note: "<b>5 min</b> easy cardio (treadmill / bike) to raise body temp, then the mobility + ramp-up sets below. The goal is warm shoulders, elbows and chest before you press heavy — never your first hard set cold.",
+    items: [
+      {name:"Treadmill / Bike", art:"cardio", target:"General", sets:"5 min", reps:"easy pace", cue:"Light sweat, slightly out of breath."},
+      {name:"Arm Circles + Band Pull-Apart", art:"mobility", target:"Shoulders", sets:"2 sets", reps:"15 each", cue:"Wake up rear delts & rotator cuff."},
+      {name:"Push-Ups", art:"chest", target:"Chest / Core", sets:"2 sets", reps:"10–12", cue:"Slow controlled reps to prime the press."},
+      {name:"Empty Bar Bench Press", art:"chest", target:"Ramp-up", sets:"1 set", reps:"15", cue:"Groove the bar path with just the bar (20 kg)."},
+      {name:"Ramp-Up Set 1", art:"chest", target:"Bench", sets:"1 set", reps:"8", cue:"~50% of working weight (≈ 25 kg)."},
+      {name:"Ramp-Up Set 2", art:"chest", target:"Bench", sets:"1 set", reps:"5", cue:"~70% of working weight (≈ 32 kg), then start working sets."},
+    ],
+  },
+  legs: {
+    note: "<b>5 min</b> on the bike, then open up the hips, knees and ankles. Legs need the most thorough warm-up — ramp the squat/press in stages so the first heavy set feels strong, not shaky.",
+    items: [
+      {name:"Stationary Bike", art:"cardio", target:"General", sets:"5 min", reps:"moderate", cue:"Get blood into the quads and hamstrings."},
+      {name:"Bodyweight Squats", art:"squat", target:"Hips / Knees", sets:"2 sets", reps:"15", cue:"Full depth, knees track over toes."},
+      {name:"Walking Leg Swings", art:"mobility", target:"Hips", sets:"2 sets", reps:"12 each", cue:"Front-back and side-to-side to loosen hips."},
+      {name:"Empty Bar Squat", art:"squat", target:"Ramp-up", sets:"1 set", reps:"12", cue:"Just the bar (20 kg), grease the groove."},
+      {name:"Ramp-Up Set 1", art:"squat", target:"Squat", sets:"1 set", reps:"8", cue:"~50% of working weight."},
+      {name:"Ramp-Up Set 2", art:"squat", target:"Squat", sets:"1 set", reps:"5", cue:"~70%, then begin working sets."},
+    ],
+  },
+  pull: {
+    note: "<b>5 min</b> cardio, then activate the lats and upper back so you pull with your back — not just your arms. Light pull-aparts and ramp sets protect the lower back on rows.",
+    items: [
+      {name:"Rower / Bike", art:"cardio", target:"General", sets:"5 min", reps:"easy pace", cue:"Rowing machine doubles as a back primer."},
+      {name:"Band Pull-Apart", art:"facepull", target:"Upper Back", sets:"2 sets", reps:"15", cue:"Squeeze shoulder blades together."},
+      {name:"Scapular Pulls (hang)", art:"pullup", target:"Lats", sets:"2 sets", reps:"10", cue:"From a dead hang, pull shoulders down — no elbow bend."},
+      {name:"Light Lat Pulldown", art:"lats", target:"Ramp-up", sets:"1 set", reps:"15", cue:"Feel the lats stretch and contract."},
+      {name:"Ramp-Up Set 1", art:"lats", target:"First lift", sets:"1 set", reps:"8", cue:"~50% of working weight."},
+      {name:"Ramp-Up Set 2", art:"lats", target:"First lift", sets:"1 set", reps:"5", cue:"~70%, then start working sets."},
+    ],
+  },
+};
+
+const DAYS = [
+  {
+    day:"Monday", type:"push", title:"Push A", variant:"A",
+    focus:"Chest · Shoulders · Triceps — strength focus",
+    exercises:[
+      {name:"Barbell Bench Press", art:"chest", target:"Chest", sets:"4", reps:"6–8", load:"32–40 kg", cue:"Shoulder blades pinned, control to the chest, drive up."},
+      {name:"Incline Dumbbell Press", art:"incline", target:"Upper Chest", sets:"3", reps:"8–10", load:"12–16 kg ×2", cue:"Bench at 30°; press dumbbells up and slightly together."},
+      {name:"Machine Shoulder Press", art:"shoulder", target:"Front Delts", sets:"3", reps:"8–10", load:"machine", cue:"Press without locking out hard; keep ribs down."},
+      {name:"Cable Lateral Raise", art:"lateral", target:"Side Delts", sets:"3", reps:"12–15", load:"2.5–5 kg", cue:"Lead with the elbow, no swinging — slow lower."},
+      {name:"Cable Triceps Pushdown", art:"triceps", target:"Triceps", sets:"3", reps:"10–12", load:"15–25 kg", cue:"Elbows glued to sides, full lockout, squeeze."},
+      {name:"Overhead DB Triceps Extension", art:"triceps_oh", target:"Triceps (long head)", sets:"3", reps:"10–12", load:"8–12 kg", cue:"Deep stretch behind the head, extend fully."},
+    ],
+  },
+  {
+    day:"Tuesday", type:"legs", title:"Legs A", variant:"A",
+    focus:"Quads · Hamstrings · Calves — squat focus",
+    exercises:[
+      {name:"Barbell Back Squat", art:"squat", target:"Quads / Glutes", sets:"4", reps:"6–8", load:"40–50 kg", cue:"Brace core, sit between your hips, drive through mid-foot."},
+      {name:"Leg Press", art:"legpress", target:"Quads", sets:"3", reps:"10–12", load:"machine", cue:"Feet shoulder-width; don't let lower back round at the bottom."},
+      {name:"Romanian Deadlift", art:"rdl", target:"Hamstrings / Glutes", sets:"3", reps:"8–10", load:"30–40 kg", cue:"Soft knees, push hips back, feel the hamstring stretch."},
+      {name:"Leg Extension", art:"legext", target:"Quads", sets:"3", reps:"12–15", load:"machine", cue:"Pause and squeeze hard at the top."},
+      {name:"Seated Leg Curl", art:"legcurl", target:"Hamstrings", sets:"3", reps:"12–15", load:"machine", cue:"Control the negative, don't bounce the weight."},
+      {name:"Standing Calf Raise", art:"calf", target:"Calves", sets:"4", reps:"15–20", load:"machine", cue:"Full stretch at the bottom, high squeeze at the top."},
+    ],
+  },
+  {
+    day:"Wednesday", type:"pull", title:"Pull A", variant:"A",
+    focus:"Back · Rear Delts · Biceps — width focus",
+    exercises:[
+      {name:"Lat Pulldown", art:"lats", target:"Lats", sets:"4", reps:"8–10", load:"machine", cue:"Pull the bar to upper chest, drive elbows down and back."},
+      {name:"Barbell Bent-Over Row", art:"row", target:"Mid Back", sets:"3", reps:"8–10", load:"30–40 kg", cue:"Hinge ~45°, pull to the navel, keep the back flat."},
+      {name:"Seated Cable Row", art:"cablerow", target:"Mid Back", sets:"3", reps:"10–12", load:"machine", cue:"Chest tall, squeeze shoulder blades, don't lean back hard."},
+      {name:"Face Pull", art:"facepull", target:"Rear Delts", sets:"3", reps:"15", load:"light cable", cue:"Pull rope to your forehead, elbows high — great for posture."},
+      {name:"Dumbbell Bicep Curl", art:"biceps", target:"Biceps", sets:"3", reps:"10–12", load:"8–12 kg", cue:"No swinging; supinate the wrist as you curl up."},
+      {name:"Hammer Curl", art:"hammer", target:"Biceps / Forearm", sets:"3", reps:"10–12", load:"8–12 kg", cue:"Neutral grip, control down for a 2-count."},
+    ],
+  },
+  {
+    day:"Thursday", type:"push", title:"Push B", variant:"B",
+    focus:"Chest · Shoulders · Triceps — hypertrophy focus",
+    exercises:[
+      {name:"Incline Barbell Press", art:"incline", target:"Upper Chest", sets:"4", reps:"8–10", load:"25–32 kg", cue:"Bench at 30°; bar to upper chest, elbows tucked ~45°."},
+      {name:"Flat Dumbbell Press", art:"chest", target:"Chest", sets:"3", reps:"10–12", load:"14–18 kg ×2", cue:"Deep stretch at the bottom, full range each rep."},
+      {name:"Pec Dec Machine Fly", art:"pecdec", target:"Chest", sets:"3", reps:"12–15", load:"machine", cue:"Hug the handles together, pause and squeeze the chest."},
+      {name:"Dumbbell Lateral Raise", art:"lateral", target:"Side Delts", sets:"4", reps:"12–15", load:"4–7 kg", cue:"Pour-the-jug tilt, lift to shoulder height only."},
+      {name:"Assisted Dips", art:"dips", target:"Lower Chest / Triceps", sets:"3", reps:"8–12", load:"assist machine", cue:"Lean forward for chest; stay upright for triceps."},
+      {name:"Rope Triceps Pushdown", art:"triceps", target:"Triceps", sets:"3", reps:"12–15", load:"15–22 kg", cue:"Spread the rope apart at the bottom and squeeze."},
+    ],
+  },
+  {
+    day:"Friday", type:"legs", title:"Legs B", variant:"B",
+    focus:"Quads · Hamstrings · Calves — machine & unilateral focus",
+    exercises:[
+      {name:"Hack Squat Machine", art:"hack", target:"Quads", sets:"4", reps:"8–10", load:"machine", cue:"Controlled depth, push through the whole foot."},
+      {name:"Walking Dumbbell Lunges", art:"lunge", target:"Quads / Glutes", sets:"3", reps:"10–12 / leg", load:"8–12 kg ×2", cue:"Long stride, knee tracks over toe, torso tall."},
+      {name:"Leg Press (feet high)", art:"legpress", target:"Hamstrings / Glutes", sets:"3", reps:"10–12", load:"machine", cue:"Higher foot placement shifts work to glutes & hams."},
+      {name:"Lying Leg Curl", art:"legcurl", target:"Hamstrings", sets:"3", reps:"10–12", load:"machine", cue:"Curl fully, slow 3-second negative."},
+      {name:"Leg Extension", art:"legext", target:"Quads", sets:"3", reps:"15–20", load:"machine", cue:"High-rep burnout, squeeze at the top."},
+      {name:"Seated Calf Raise", art:"calf", target:"Calves (soleus)", sets:"4", reps:"15–20", load:"machine", cue:"Pause at the top and full stretch at the bottom."},
+    ],
+  },
+  {
+    day:"Saturday", type:"pull", title:"Pull B", variant:"B",
+    focus:"Back · Rear Delts · Biceps — thickness focus",
+    exercises:[
+      {name:"Assisted Pull-Ups", art:"pullup", target:"Lats", sets:"4", reps:"6–10", load:"assist machine", cue:"Full hang to chin over bar; drive elbows down."},
+      {name:"Chest-Supported Row", art:"row", target:"Mid Back", sets:"3", reps:"10–12", load:"machine", cue:"Chest on the pad removes momentum — pure back work."},
+      {name:"Single-Arm Dumbbell Row", art:"row", target:"Lats", sets:"3", reps:"10–12 / arm", load:"14–20 kg", cue:"Brace on the bench, row to the hip, full stretch."},
+      {name:"Straight-Arm Pulldown", art:"strarm", target:"Lats", sets:"3", reps:"12–15", load:"light cable", cue:"Arms nearly straight, sweep the bar to your thighs."},
+      {name:"Cable Bicep Curl", art:"biceps", target:"Biceps", sets:"3", reps:"12–15", load:"15–22 kg", cue:"Constant tension — never let the stack rest."},
+      {name:"Preacher Curl Machine", art:"preacher", target:"Biceps (peak)", sets:"3", reps:"10–12", load:"machine", cue:"Don't fully relax at the bottom; squeeze at the top."},
+    ],
+  },
+];
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+const tabsEl = document.getElementById('tabs');
+const contentEl = document.getElementById('content');
+
+function card(ex, n, badge){
+  return `
+  <div class="card">
+    <div class="thumb">
+      <span class="exnum">${n}</span>
+      ${badge ? `<span class="badge">${badge}</span>` : ``}
+      ${ART[ex.art] || ART.mobility}
+    </div>
+    <div class="card-body">
+      <div class="ex-name">${ex.name}</div>
+      <div class="ex-target">${ex.target}</div>
+      <div class="ex-meta">
+        <span class="pill"><b>${ex.sets}</b> sets</span>
+        <span class="pill"><b>${ex.reps}</b> reps</span>
+        ${ex.load ? `<span class="pill"><b>${ex.load}</b></span>` : ``}
+      </div>
+      <div class="ex-cue">${ex.cue}</div>
+    </div>
+  </div>`;
+}
+
+function renderDay(i){
+  const d = DAYS[i];
+  const w = WARMUPS[d.type];
+  contentEl.innerHTML = `
+    <div class="day-head">
+      <span class="daytag">${d.day}</span>
+      <span class="day-title">${d.title}</span>
+    </div>
+    <div class="day-focus">${d.focus}</div>
+
+    <div class="section-label"><span class="dot"></span>Warm-Up — do this first</div>
+    <div class="warm-intro">${w.note}</div>
+    <div class="cards">${w.items.map((e,idx)=>card(e, idx+1, 'Warm-up')).join('')}</div>
+
+    <div class="section-label"><span class="dot"></span>Workout — 6 exercises</div>
+    <div class="cards">${d.exercises.map((e,idx)=>card(e, idx+1)).join('')}</div>
+  `;
+  contentEl.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+DAYS.forEach((d,i)=>{
+  const b = document.createElement('button');
+  b.className = 'tab-btn' + (i===0 ? ' active' : '');
+  b.innerHTML = `${d.day.slice(0,3)}<small>${d.title}</small>`;
+  b.onclick = ()=>{
+    document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    renderDay(i);
+  };
+  tabsEl.appendChild(b);
+});
+
+renderDay(0);
+</script>
+</body>
+</html>
