@@ -34,7 +34,7 @@
     color:var(--text);
     font-family:'Inter',system-ui,sans-serif;
     min-height:100vh;
-    padding-bottom:calc(60px + env(safe-area-inset-bottom));
+    padding-bottom:calc(96px + env(safe-area-inset-bottom));
     -webkit-font-smoothing:antialiased;
   }
   h1,h2,h3,.brand,.tab-btn,.daytag,.exnum{font-family:'Oswald',sans-serif;letter-spacing:.5px}
@@ -49,6 +49,7 @@
   .brand{font-size:clamp(34px,6vw,58px);font-weight:700;text-transform:uppercase;line-height:1}
   .brand span{color:var(--gold)}
   .tagline{color:var(--muted);margin-top:10px;font-size:14px;letter-spacing:2px;text-transform:uppercase}
+  .today-line{margin-top:9px;font-size:13px;color:var(--gold-soft);letter-spacing:1px;font-weight:500}
 
   /* ---------- Tabs ---------- */
   .tabs{
@@ -65,7 +66,10 @@
     color:var(--muted);border-radius:12px;padding:10px 16px;
     font-size:15px;font-weight:600;text-transform:uppercase;
     transition:.18s ease;min-width:104px;text-align:center;line-height:1.2;
+    position:relative;
   }
+  .tab-btn.today::before{content:"";position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 2px var(--card)}
+  .tab-btn.today.active::before{background:#1a1a1a;box-shadow:0 0 0 2px var(--gold-soft)}
   .tab-btn small{display:block;font-size:11px;font-family:'Inter';letter-spacing:.5px;opacity:.7;font-weight:500}
   .tab-btn:hover{border-color:var(--gold);color:var(--text);transform:translateY(-1px)}
   .tab-btn.active{
@@ -119,6 +123,30 @@
   .steps li{font-size:13px;color:var(--muted);line-height:1.45}
   .steps li::marker{color:var(--gold);font-weight:700}
 
+  .today-pill{font-size:12px;font-weight:600;color:#1a1a1a;background:var(--gold-soft);padding:5px 11px;border-radius:999px;font-family:'Oswald';letter-spacing:.5px;text-transform:uppercase}
+  .rest-banner{background:var(--bg-2);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:12px;padding:14px 16px;margin-bottom:18px;color:var(--muted);font-size:14px;line-height:1.55}
+  .rest-banner b{color:var(--text)}
+
+  /* ---------- Rest Timer ---------- */
+  .timer-fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:60;height:58px;min-width:58px;padding:0 18px;border-radius:30px;border:none;background:linear-gradient(180deg,var(--gold),#b8932b);color:#1a1a1a;font-family:'Oswald',sans-serif;font-weight:700;font-size:19px;display:flex;align-items:center;gap:8px;box-shadow:0 8px 24px rgba(0,0,0,.5);cursor:pointer}
+  .timer-fab.running{background:linear-gradient(180deg,#3fb950,#2c9b42);color:#fff}
+  .timer-fab.done{background:linear-gradient(180deg,#e5484d,#c5363b);color:#fff;animation:pulse .6s ease-in-out 4}
+  @keyframes pulse{50%{transform:scale(1.08)}}
+  .fab-time{font-variant-numeric:tabular-nums}
+  .timer-panel{position:fixed;right:16px;bottom:calc(86px + env(safe-area-inset-bottom));z-index:60;width:286px;max-width:calc(100vw - 32px);background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 18px 48px rgba(0,0,0,.6);display:none}
+  .timer-panel.open{display:block}
+  .tp-head{display:flex;justify-content:space-between;align-items:center;font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:1px;font-size:15px;color:var(--gold-soft)}
+  .tp-close{background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;line-height:1}
+  .tp-display{font-family:'Oswald',sans-serif;font-size:56px;font-weight:700;text-align:center;margin:4px 0 12px;font-variant-numeric:tabular-nums;color:var(--text);line-height:1}
+  .tp-display.done{color:#3fb950}
+  .tp-presets{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:13px}
+  .tp-presets button{flex:1 1 auto;min-width:46px;background:var(--card-2);border:1px solid var(--line);color:var(--muted);border-radius:9px;padding:9px 6px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
+  .tp-presets button.sel{border-color:var(--gold);color:var(--gold-soft);background:rgba(212,175,55,.13)}
+  .tp-controls{display:flex;gap:8px}
+  .tp-main{flex:2;background:linear-gradient(180deg,var(--gold),#b8932b);color:#1a1a1a;border:none;border-radius:10px;padding:13px;font-family:'Oswald',sans-serif;font-weight:700;font-size:16px;text-transform:uppercase;cursor:pointer;letter-spacing:.5px}
+  .tp-main.pause{background:linear-gradient(180deg,#e0a93f,#c98f2a)}
+  .tp-sec{flex:1;background:var(--card-2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:13px 4px;font-size:13px;font-weight:600;cursor:pointer}
+
   footer{text-align:center;color:var(--muted);font-size:13px;margin-top:46px;padding:24px 18px 0;border-top:1px solid var(--line);max-width:1120px;margin-left:auto;margin-right:auto}
   footer b{color:var(--gold-soft)}
 
@@ -138,6 +166,7 @@
 <header>
   <div class="brand">YD <span>GAINS</span></div>
   <div class="tagline">Gold's Gym · 6-Day Push / Legs / Pull</div>
+  <div class="today-line" id="todayLine"></div>
 </header>
 
 <nav class="tabs" id="tabs"></nav>
@@ -148,6 +177,25 @@
   Each exercise shows the muscles it trains — <b>bright gold</b> is the primary target, <b>dim gold</b> assists.
   Loads are starting suggestions; add weight when all sets feel easy with 1–2 reps left in the tank. No exercise repeats across the week. Built for YD 💪
 </footer>
+
+<!-- Rest timer -->
+<button class="timer-fab" id="timerFab" aria-label="Rest timer"><span id="fabIcon">⏱</span><span class="fab-time" id="fabTime"></span></button>
+<div class="timer-panel" id="timerPanel">
+  <div class="tp-head"><span>Rest Timer</span><button class="tp-close" id="tpClose" aria-label="Close">✕</button></div>
+  <div class="tp-display" id="tpDisplay">1:30</div>
+  <div class="tp-presets">
+    <button data-sec="45">0:45</button>
+    <button data-sec="60">1:00</button>
+    <button data-sec="90">1:30</button>
+    <button data-sec="120">2:00</button>
+    <button data-sec="180">3:00</button>
+  </div>
+  <div class="tp-controls">
+    <button class="tp-main" id="tpToggle">Start</button>
+    <button class="tp-sec" id="tpAdd">+15s</button>
+    <button class="tp-sec" id="tpReset">Reset</button>
+  </div>
+</div>
 
 <script>
 /* ============================================================
@@ -383,13 +431,18 @@ function card(ex, n, badge){
   </div>`;
 }
 
-function renderDay(i){
+function renderDay(i, doScroll){
   const d = DAYS[i];
   const w = WARMUPS[d.type];
+  const isToday = !TODAY.isRest && i===TODAY.idx;
+  const restBanner = (TODAY.isRest && i===0)
+    ? `<div class="rest-banner">😴 Today is <b>Sunday</b> — your scheduled rest day. Showing <b>Monday · Push A</b> so you're ready for tomorrow.</div>` : '';
   contentEl.innerHTML = `
+    ${restBanner}
     <div class="day-head">
       <span class="daytag">${d.day}</span>
       <span class="day-title">${d.title}</span>
+      ${isToday ? `<span class="today-pill">● Today</span>` : ``}
     </div>
     <div class="day-focus">${d.focus}</div>
     <div class="legend">
@@ -405,22 +458,82 @@ function renderDay(i){
     <div class="section-label"><span class="dot"></span>Workout — 6 exercises</div>
     <div class="cards">${d.exercises.map((e,idx)=>card(e, idx+1)).join('')}</div>
   `;
-  contentEl.scrollIntoView({behavior:'smooth', block:'start'});
+  if(doScroll) contentEl.scrollIntoView({behavior:'smooth', block:'start'});
 }
 
+/* Detect the current day in India (IST), independent of the device's timezone */
+function istToday(){
+  const now = new Date();
+  const weekday = new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Kolkata',weekday:'long'}).format(now);
+  const dateStr = new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(now);
+  const map = {Monday:0,Tuesday:1,Wednesday:2,Thursday:3,Friday:4,Saturday:5};
+  const idx = map[weekday];
+  return { idx: idx===undefined?0:idx, isRest: weekday==='Sunday', weekday, dateStr };
+}
+const TODAY = istToday();
+
+const tabBtns = [];
 DAYS.forEach((d,i)=>{
   const b = document.createElement('button');
-  b.className = 'tab-btn' + (i===0 ? ' active' : '');
+  const isToday = !TODAY.isRest && i===TODAY.idx;
+  b.className = 'tab-btn' + (isToday ? ' today' : '');
   b.innerHTML = `${d.day.slice(0,3)}<small>${d.title}</small>`;
   b.onclick = ()=>{
     document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));
     b.classList.add('active');
-    renderDay(i);
+    renderDay(i, true);
   };
   tabsEl.appendChild(b);
+  tabBtns.push(b);
 });
 
-renderDay(0);
+/* Auto-open today's session (Sunday falls back to Monday) */
+const startIdx = TODAY.isRest ? 0 : TODAY.idx;
+tabBtns[startIdx].classList.add('active');
+renderDay(startIdx, false);
+
+document.getElementById('todayLine').textContent =
+  (TODAY.isRest ? 'Sunday · Rest Day' : TODAY.dateStr) + ' · IST';
+
+/* Centre today's tab in the horizontally-scrolling row (mobile) */
+requestAnimationFrame(()=>{
+  const b = tabBtns[startIdx];
+  tabsEl.scrollLeft = b.offsetLeft - tabsEl.clientWidth/2 + b.clientWidth/2;
+});
+
+/* ============================================================
+   REST TIMER
+   ============================================================ */
+(function(){
+  let duration=90, remaining=90, running=false, endAt=0, tick=null, actx=null;
+  const fab=document.getElementById('timerFab'), fabIcon=document.getElementById('fabIcon'), fabTime=document.getElementById('fabTime');
+  const panel=document.getElementById('timerPanel'), disp=document.getElementById('tpDisplay');
+  const toggle=document.getElementById('tpToggle'), addBtn=document.getElementById('tpAdd'), resetBtn=document.getElementById('tpReset'), closeBtn=document.getElementById('tpClose');
+  const presets=[...document.querySelectorAll('.tp-presets button')];
+
+  const fmt=s=>{s=Math.max(0,Math.round(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');};
+  function render(){
+    disp.textContent=fmt(remaining);
+    fab.classList.toggle('running', running);
+    if(running){fabIcon.textContent=''; fabTime.textContent=fmt(remaining);}
+    else{fabIcon.textContent='⏱'; fabTime.textContent='';}
+  }
+  function clear(){ if(tick){clearInterval(tick);tick=null;} }
+  function ensureAudio(){ try{ if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)(); if(actx.state==='suspended') actx.resume(); }catch(e){} }
+  function beep(){ if(!actx) return; [0,0.26,0.52].forEach(t=>{ const o=actx.createOscillator(),g=actx.createGain(); o.connect(g);g.connect(actx.destination); o.frequency.value=880; const s=actx.currentTime+t; o.start(s); g.gain.setValueAtTime(0.0001,s); g.gain.exponentialRampToValueAtTime(0.4,s+0.02); g.gain.exponentialRampToValueAtTime(0.0001,s+0.2); o.stop(s+0.22); }); }
+  function setDur(s){ duration=s; remaining=s; running=false; clear(); disp.classList.remove('done'); fab.classList.remove('done'); toggle.textContent='Start'; toggle.classList.remove('pause'); presets.forEach(b=>b.classList.toggle('sel', +b.dataset.sec===s)); render(); }
+  function finish(){ running=false; clear(); remaining=0; disp.classList.add('done'); fab.classList.remove('running'); fab.classList.add('done'); toggle.textContent='Start'; toggle.classList.remove('pause'); render(); beep(); if(navigator.vibrate) navigator.vibrate([220,120,220]); }
+  function start(){ ensureAudio(); if(remaining<=0) remaining=duration; running=true; endAt=Date.now()+remaining*1000; disp.classList.remove('done'); fab.classList.remove('done'); toggle.textContent='Pause'; toggle.classList.add('pause'); clear(); tick=setInterval(()=>{ remaining=(endAt-Date.now())/1000; if(remaining<=0) finish(); else render(); },200); render(); }
+  function pause(){ running=false; clear(); remaining=Math.max(0,(endAt-Date.now())/1000); toggle.textContent='Resume'; toggle.classList.remove('pause'); render(); }
+
+  fab.onclick=()=>panel.classList.toggle('open');
+  closeBtn.onclick=()=>panel.classList.remove('open');
+  toggle.onclick=()=>{ running?pause():start(); };
+  addBtn.onclick=()=>{ remaining+=15; if(running) endAt+=15000; disp.classList.remove('done'); fab.classList.remove('done'); render(); };
+  resetBtn.onclick=()=>setDur(duration);
+  presets.forEach(b=>b.onclick=()=>setDur(+b.dataset.sec));
+  setDur(90);
+})();
 </script>
 </body>
 </html>
