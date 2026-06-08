@@ -128,7 +128,7 @@
   .rest-banner b{color:var(--text)}
 
   /* ---------- Rest Timer ---------- */
-  .timer-fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:60;height:58px;min-width:58px;padding:0 18px;border-radius:30px;border:none;background:linear-gradient(180deg,var(--gold),#b8932b);color:#1a1a1a;font-family:'Oswald',sans-serif;font-weight:700;font-size:19px;display:flex;align-items:center;gap:8px;box-shadow:0 8px 24px rgba(0,0,0,.5);cursor:pointer}
+  .timer-fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:60;height:58px;min-width:58px;padding:0 18px;border-radius:30px;border:none;background:linear-gradient(180deg,var(--gold),#b8932b);color:#1a1a1a;font-family:'Oswald',sans-serif;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center;gap:0;box-shadow:0 8px 24px rgba(0,0,0,.5);cursor:pointer}
   .timer-fab.running{background:linear-gradient(180deg,#3fb950,#2c9b42);color:#fff}
   .timer-fab.done{background:linear-gradient(180deg,#e5484d,#c5363b);color:#fff;animation:pulse .6s ease-in-out 4}
   @keyframes pulse{50%{transform:scale(1.08)}}
@@ -146,6 +146,60 @@
   .tp-main{flex:2;background:linear-gradient(180deg,var(--gold),#b8932b);color:#1a1a1a;border:none;border-radius:10px;padding:13px;font-family:'Oswald',sans-serif;font-weight:700;font-size:16px;text-transform:uppercase;cursor:pointer;letter-spacing:.5px}
   .tp-main.pause{background:linear-gradient(180deg,#e0a93f,#c98f2a)}
   .tp-sec{flex:1;background:var(--card-2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:13px 4px;font-size:13px;font-weight:600;cursor:pointer}
+
+  /* ---------- Set logger ---------- */
+  .logger{margin-top:13px;border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:7px}
+  .log-head{display:flex;justify-content:space-between;font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:1px;font-size:12.5px;color:var(--gold-soft)}
+  .log-head .log-x{color:var(--muted);letter-spacing:.5px}
+  .log-row{display:grid;grid-template-columns:26px 1fr 1fr 46px;gap:7px;align-items:center}
+  .log-row .set-no{font-family:'Oswald',sans-serif;font-weight:700;color:var(--muted);text-align:center;font-size:14px}
+  .log-row input{width:100%;background:var(--card-2);border:1px solid var(--line);border-radius:8px;color:var(--text);padding:9px 8px;font-size:15px;font-family:'Inter',sans-serif;text-align:center;-moz-appearance:textfield;appearance:textfield}
+  .log-row input::-webkit-outer-spin-button,.log-row input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+  .log-row input::placeholder{color:#6b6b73}
+  .log-row input:focus{outline:none;border-color:var(--gold)}
+  .log-done{background:var(--card-2);border:1px solid var(--line);border-radius:8px;height:38px;cursor:pointer;font-size:17px;font-weight:700;line-height:1;display:flex;align-items:center;justify-content:center;color:#1a1a1a}
+  .log-done::before{content:"✓";color:var(--muted);opacity:.32}
+  .log-row.done .log-done{background:linear-gradient(180deg,var(--gold),#b8932b);border-color:var(--gold)}
+  .log-row.done .log-done::before{color:#1a1a1a;opacity:1}
+  .log-row.done input{border-color:rgba(212,175,55,.5);background:rgba(212,175,55,.08)}
+  .log-row.done .set-no{color:var(--gold-soft)}
+  .unit-toggle{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .unit-btn{background:var(--card-2);border:none;color:var(--muted);font-family:'Oswald',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:.5px;padding:5px 12px;cursor:pointer;text-transform:uppercase}
+  .unit-btn.on{background:var(--gold);color:#1a1a1a}
+  .log-row.td{margin-top:1px}
+  .log-row.td .set-no{color:var(--gold-soft);font-size:12px;font-weight:700}
+  .log-row.td input{border-style:dashed;border-color:rgba(212,175,55,.32)}
+  .td-note{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.45}
+  .td-note b{color:var(--gold-soft)}
+  .td-pill{color:var(--gold-soft);border-color:rgba(212,175,55,.4)!important}
+
+  /* ---------- Progress / results ---------- */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 10px;text-align:center}
+  .stat .v{font-family:'Oswald',sans-serif;font-size:clamp(24px,6vw,32px);font-weight:700;color:var(--gold);line-height:1}
+  .stat .l{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:6px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:16px}
+  .panel h3{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:1px;font-size:18px;margin-bottom:14px;display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap}
+  .panel h3 small{color:var(--muted);font-size:12.5px;font-family:'Inter',sans-serif;letter-spacing:.3px;text-transform:none}
+  .chart svg{width:100%;height:auto;display:block}
+  .ex-select{background:var(--card-2);border:1px solid var(--line);color:var(--text);border-radius:9px;padding:8px 10px;font-size:14px;font-family:'Inter',sans-serif;max-width:62%}
+  .empty{color:var(--muted);text-align:center;padding:26px 8px;font-size:14px;line-height:1.6}
+  .sess-list{display:flex;flex-direction:column;gap:8px}
+  .sess{display:flex;justify-content:space-between;align-items:center;background:var(--card-2);border:1px solid var(--line);border-radius:10px;padding:10px 13px;font-size:14px}
+  .sess .s-d{font-family:'Oswald',sans-serif;letter-spacing:.5px}
+  .sess .s-m{color:var(--muted);font-size:12.5px}
+  .sync-card{background:var(--bg-2);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:14px;padding:16px;margin-top:16px}
+  .sync-row{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:14px;margin-bottom:11px}
+  .sync-status{font-size:12.5px;font-weight:600;white-space:nowrap}
+  .sync-status.ok{color:#3fb950}.sync-status.warn{color:#e0a93f}.sync-status.off{color:var(--muted)}
+  .sync-card input{width:100%;background:var(--card-2);border:1px solid var(--line);border-radius:9px;color:var(--text);padding:10px;font-size:13px;font-family:'Inter',sans-serif;margin-bottom:10px}
+  .sync-card input:focus{outline:none;border-color:var(--gold)}
+  .sync-actions{display:flex;gap:8px;flex-wrap:wrap}
+  .sync-actions button{background:var(--card-2);border:1px solid var(--line);color:var(--text);border-radius:9px;padding:9px 13px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
+  .sync-actions button.primary{background:linear-gradient(180deg,var(--gold),#b8932b);color:#1a1a1a;border-color:var(--gold)}
+  .sync-help{font-size:12px;color:var(--muted);margin-top:11px;line-height:1.55}
+  .sync-help b{color:var(--gold-soft);font-weight:600}
+  .prog-tab.active{background:linear-gradient(180deg,var(--gold-soft),var(--gold));}
 
   footer{text-align:center;color:var(--muted);font-size:13px;margin-top:46px;padding:24px 18px 0;border-top:1px solid var(--line);max-width:1120px;margin-left:auto;margin-right:auto}
   footer b{color:var(--gold-soft)}
@@ -174,8 +228,7 @@
 <main class="wrap" id="content"></main>
 
 <footer>
-  Each exercise shows the muscles it trains — <b>bright gold</b> is the primary target, <b>dim gold</b> assists.
-  Loads are starting suggestions; add weight when all sets feel easy with 1–2 reps left in the tank. No exercise repeats across the week. Built for YD 💪
+  Built for YD 💪
 </footer>
 
 <!-- Rest timer -->
@@ -303,7 +356,7 @@ const WARMUPS = {
 const DAYS = [
   { day:"Monday", type:"push", title:"Push A", focus:"Chest · Shoulders · Triceps — strength focus",
     exercises:[
-      {name:"Barbell Bench Press",sets:"4",reps:"6–8",load:"32–40 kg",prim:["pec"],sec:["fdelt","triceps"],
+      {name:"Barbell Bench Press",sets:"3",reps:"6–8",load:"32–40 kg",prim:["pec"],sec:["fdelt","triceps"],
         steps:["Lie flat, eyes under the bar, grip just wider than shoulders.","Pull shoulder blades back & down, plant your feet.","Lower the bar to mid-chest, then press up and slightly back."]},
       {name:"Incline Dumbbell Press",sets:"3",reps:"8–10",load:"12–16 kg ×2",prim:["pec","fdelt"],sec:["triceps"],
         steps:["Set the bench to 30°, dumbbells at shoulder level.","Press up and slightly together — don't clank them.","Lower under control into a deep stretch."]},
@@ -318,7 +371,7 @@ const DAYS = [
     ]},
   { day:"Tuesday", type:"legs", title:"Legs A", focus:"Quads · Hamstrings · Calves — squat focus",
     exercises:[
-      {name:"Barbell Back Squat",sets:"4",reps:"6–8",load:"40–50 kg",prim:["quad","glute"],sec:["hamstring","lowerback"],
+      {name:"Barbell Back Squat",sets:"3",reps:"6–8",load:"40–50 kg",prim:["quad","glute"],sec:["hamstring","lowerback"],
         steps:["Bar on your upper traps, feet shoulder-width, toes slightly out.","Brace your core and sit your hips down between your knees.","Hit at least parallel, then drive up through mid-foot."]},
       {name:"Leg Press",sets:"3",reps:"10–12",load:"machine",prim:["quad"],sec:["glute","hamstring"],
         steps:["Feet mid-platform, shoulder-width, back flat on the pad.","Lower until knees reach ~90° — don't let hips curl.","Press through your heels; don't lock the knees hard."]},
@@ -328,12 +381,12 @@ const DAYS = [
         steps:["Pad on your lower shins, knees at the seat pivot.","Extend to straight and squeeze your quads at the top.","Lower slowly under control."]},
       {name:"Seated Leg Curl",sets:"3",reps:"12–15",load:"machine",prim:["hamstring"],sec:[],
         steps:["Pad on your lower calves, thighs strapped down.","Curl your heels under the seat to a full contraction.","Return slowly — don't let the stack drop."]},
-      {name:"Standing Calf Raise",sets:"4",reps:"15–20",load:"machine",prim:["calf"],sec:[],
+      {name:"Standing Calf Raise",sets:"3",reps:"15–20",load:"machine",prim:["calf"],sec:[],
         steps:["Balls of feet on the platform, shoulders under the pads.","Drop your heels for a full stretch.","Rise as high as possible and pause at the top."]},
     ]},
   { day:"Wednesday", type:"pull", title:"Pull A", focus:"Back · Rear Delts · Biceps — width focus",
     exercises:[
-      {name:"Lat Pulldown",sets:"4",reps:"8–10",load:"machine",prim:["lat"],sec:["biceps","rdelt"],
+      {name:"Lat Pulldown",sets:"3",reps:"8–10",load:"machine",prim:["lat"],sec:["biceps","rdelt"],
         steps:["Grip wider than shoulders, thighs under the pads.","Pull the bar to your upper chest, driving elbows down.","Control it back up to a full overhead stretch."]},
       {name:"Barbell Bent-Over Row",sets:"3",reps:"8–10",load:"30–40 kg",prim:["lat","trap"],sec:["biceps","lowerback"],
         steps:["Hinge to ~45° with a flat back, bar at your shins.","Pull to your belly button, elbows driving back.","Lower under control, keeping the back braced."]},
@@ -348,13 +401,13 @@ const DAYS = [
     ]},
   { day:"Thursday", type:"push", title:"Push B", focus:"Chest · Shoulders · Triceps — hypertrophy focus",
     exercises:[
-      {name:"Incline Barbell Press",sets:"4",reps:"8–10",load:"25–32 kg",prim:["pec","fdelt"],sec:["triceps"],
+      {name:"Incline Barbell Press",sets:"3",reps:"8–10",load:"25–32 kg",prim:["pec","fdelt"],sec:["triceps"],
         steps:["Bench at 30°, grip slightly wider than shoulders.","Lower the bar to your upper chest, elbows ~45°.","Drive up and slightly back, over your face."]},
       {name:"Flat Dumbbell Press",sets:"3",reps:"10–12",load:"14–18 kg ×2",prim:["pec"],sec:["fdelt","triceps"],
         steps:["Lie flat, dumbbells over your chest, feet planted.","Lower to chest level for a full stretch.","Press up, squeezing the chest at the top."]},
       {name:"Pec Dec Machine Fly",sets:"3",reps:"12–15",load:"machine",prim:["pec"],sec:["fdelt"],
         steps:["Set the seat so the handles are at chest height.","With a slight elbow bend, bring the handles together.","Pause and squeeze, then open slowly."]},
-      {name:"Dumbbell Lateral Raise",sets:"4",reps:"12–15",load:"4–7 kg",prim:["sdelt"],sec:[],
+      {name:"Dumbbell Lateral Raise",sets:"3",reps:"12–15",load:"4–7 kg",prim:["sdelt"],sec:[],
         steps:["Stand tall, light dumbbells at your sides.","Raise out to shoulder height, pinkies slightly up.","Lower slowly — control beats heavy here."]},
       {name:"Assisted Chest Dips",sets:"3",reps:"8–12",load:"assist machine",prim:["pec","triceps"],sec:["fdelt"],
         steps:["Set the assist pad, grip the bars, arms locked out.","Lean forward and lower until shoulders are ~parallel.","Press back up — more forward lean hits more chest."]},
@@ -363,7 +416,7 @@ const DAYS = [
     ]},
   { day:"Friday", type:"legs", title:"Legs B", focus:"Quads · Glutes · Hamstrings — machine & unilateral focus",
     exercises:[
-      {name:"Hack Squat Machine",sets:"4",reps:"8–10",load:"machine",prim:["quad"],sec:["glute"],
+      {name:"Hack Squat Machine",sets:"3",reps:"8–10",load:"machine",prim:["quad"],sec:["glute"],
         steps:["Shoulders under the pads, feet mid-platform.","Lower under control to a ~90° knee bend.","Push through the whole foot; don't lock out hard."]},
       {name:"Walking Dumbbell Lunges",sets:"3",reps:"10–12 / leg",load:"8–12 kg ×2",prim:["quad","glute"],sec:["hamstring"],
         steps:["Dumbbells at your sides, torso tall.","Step forward and drop the back knee toward the floor.","Push through the front heel into the next step."]},
@@ -373,12 +426,12 @@ const DAYS = [
         steps:["Lie face down, pad on your lower calves.","Curl your heels toward your glutes, hips pressed down.","Lower with a slow 3-second negative."]},
       {name:"Barbell Hip Thrust",sets:"3",reps:"10–12",load:"30–40 kg",prim:["glute"],sec:["hamstring"],
         steps:["Upper back on a bench, padded bar over your hips.","Drive your hips up and squeeze the glutes hard.","Lower under control, keeping ribs down."]},
-      {name:"Seated Calf Raise",sets:"4",reps:"15–20",load:"machine",prim:["calf"],sec:[],
+      {name:"Seated Calf Raise",sets:"3",reps:"15–20",load:"machine",prim:["calf"],sec:[],
         steps:["Pad over your knees, balls of feet on the platform.","Drop your heels for a deep stretch.","Press up, pause and squeeze the calves."]},
     ]},
   { day:"Saturday", type:"pull", title:"Pull B", focus:"Back · Rear Delts · Biceps — thickness focus",
     exercises:[
-      {name:"Assisted Pull-Ups",sets:"4",reps:"6–10",load:"assist machine",prim:["lat"],sec:["biceps"],
+      {name:"Assisted Pull-Ups",sets:"3",reps:"6–10",load:"assist machine",prim:["lat"],sec:["biceps"],
         steps:["Set the assist weight, grip wider than your shoulders.","From a full hang, pull your chin over the bar.","Lower all the way down under control."]},
       {name:"Chest-Supported Row",sets:"3",reps:"10–12",load:"machine",prim:["lat","trap"],sec:["biceps","rdelt"],
         steps:["Chest on the pad, grab the handles.","Row back, squeezing your shoulder blades together.","No body swing — the pad keeps it strict."]},
@@ -401,9 +454,306 @@ const contentEl = document.getElementById('content');
 
 const IMG = {"Barbell Bench Press":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Barbell_Bench_Press_-_Medium_Grip/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Barbell_Bench_Press_-_Medium_Grip/1.jpg"],"Incline Dumbbell Press":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Incline_Dumbbell_Press/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Incline_Dumbbell_Press/1.jpg"],"Seated Dumbbell Shoulder Press":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dumbbell_Shoulder_Press/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dumbbell_Shoulder_Press/1.jpg"],"Cable Lateral Raise":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Cable_Seated_Lateral_Raise/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Cable_Seated_Lateral_Raise/1.jpg"],"Triceps Rope Pushdown":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Triceps_Pushdown_-_Rope_Attachment/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Triceps_Pushdown_-_Rope_Attachment/1.jpg"],"Overhead Dumbbell Triceps Extension":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Standing_Dumbbell_Triceps_Extension/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Standing_Dumbbell_Triceps_Extension/1.jpg"],"Barbell Back Squat":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Barbell_Full_Squat/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Barbell_Full_Squat/1.jpg"],"Leg Press":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Leg_Press/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Leg_Press/1.jpg"],"Romanian Deadlift":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Romanian_Deadlift/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Romanian_Deadlift/1.jpg"],"Leg Extension":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Leg_Extensions/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Leg_Extensions/1.jpg"],"Seated Leg Curl":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Seated_Leg_Curl/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Seated_Leg_Curl/1.jpg"],"Standing Calf Raise":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Standing_Calf_Raises/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Standing_Calf_Raises/1.jpg"],"Lat Pulldown":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Wide-Grip_Lat_Pulldown/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Wide-Grip_Lat_Pulldown/1.jpg"],"Barbell Bent-Over Row":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Bent_Over_Barbell_Row/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Bent_Over_Barbell_Row/1.jpg"],"Seated Cable Row":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Seated_Cable_Rows/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Seated_Cable_Rows/1.jpg"],"Face Pull":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Face_Pull/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Face_Pull/1.jpg"],"Dumbbell Bicep Curl":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dumbbell_Bicep_Curl/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dumbbell_Bicep_Curl/1.jpg"],"Hammer Curl":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Hammer_Curls/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Hammer_Curls/1.jpg"],"Incline Barbell Press":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Barbell_Incline_Bench_Press_-_Medium_Grip/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Barbell_Incline_Bench_Press_-_Medium_Grip/1.jpg"],"Flat Dumbbell Press":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dumbbell_Bench_Press/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dumbbell_Bench_Press/1.jpg"],"Pec Dec Machine Fly":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Butterfly/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Butterfly/1.jpg"],"Dumbbell Lateral Raise":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Side_Lateral_Raise/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Side_Lateral_Raise/1.jpg"],"Assisted Chest Dips":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dips_-_Chest_Version/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dips_-_Chest_Version/1.jpg"],"EZ-Bar Skull Crusher":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/EZ-Bar_Skullcrusher/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/EZ-Bar_Skullcrusher/1.jpg"],"Hack Squat Machine":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Hack_Squat/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Hack_Squat/1.jpg"],"Walking Dumbbell Lunges":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dumbbell_Lunges/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dumbbell_Lunges/1.jpg"],"Bulgarian Split Squat":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Split_Squat_with_Dumbbells/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Split_Squat_with_Dumbbells/1.jpg"],"Lying Leg Curl":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Lying_Leg_Curls/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Lying_Leg_Curls/1.jpg"],"Barbell Hip Thrust":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Barbell_Hip_Thrust/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Barbell_Hip_Thrust/1.jpg"],"Seated Calf Raise":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Seated_Calf_Raise/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Seated_Calf_Raise/1.jpg"],"Assisted Pull-Ups":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Band_Assisted_Pull-Up/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Band_Assisted_Pull-Up/1.jpg"],"Chest-Supported Row":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dumbbell_Incline_Row/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dumbbell_Incline_Row/1.jpg"],"Single-Arm Dumbbell Row":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/One-Arm_Dumbbell_Row/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/One-Arm_Dumbbell_Row/1.jpg"],"Straight-Arm Pulldown":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Straight-Arm_Pulldown/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Straight-Arm_Pulldown/1.jpg"],"Cable Bicep Curl":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Standing_Biceps_Cable_Curl/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Standing_Biceps_Cable_Curl/1.jpg"],"Preacher Curl Machine":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Machine_Preacher_Curls/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Machine_Preacher_Curls/1.jpg"]};
 
+/* ============================================================
+   SET LOG  +  GOOGLE SHEETS SYNC  +  PROGRESS CHARTS
+   localStorage is the source of truth; every set is also
+   appended to a Google Sheet (via an Apps Script web app) as
+   a permanent backup. See google-apps-script.gs for setup.
+   ============================================================ */
+const LOG_KEY='ydg_log_v1', Q_KEY='ydg_queue_v1';
+/* Google Sheets backend — always on, hidden from the UI. Every set syncs here silently. */
+const SHEET_URL='https://script.google.com/macros/s/AKfycbwiRozz1oZjDq339P9sT0KQ20L6mRm2GPRdliorGHQNk8KvwQ8sZOmyPE1J6ruY5uea/exec';
+let LOG={}, QUEUE=[], flushing=false;
+try{ LOG = JSON.parse(localStorage.getItem(LOG_KEY)) || {}; }catch(e){ LOG={}; }
+try{ QUEUE = JSON.parse(localStorage.getItem(Q_KEY)) || []; }catch(e){ QUEUE=[]; }
+
+function persist(){ try{ localStorage.setItem(LOG_KEY, JSON.stringify(LOG)); }catch(e){} }
+function persistQ(){ try{ localStorage.setItem(Q_KEY, JSON.stringify(QUEUE)); }catch(e){} }
+function getSheetUrl(){ return SHEET_URL; }
+function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function recKey(date,ex,set){ return date+'::'+ex+'::'+set; }
+
+/* --- read helpers --- */
+const KG_PER_LB=0.45359237, UNITS_KEY='ydg_units';
+function unitPrefs(){ try{ return JSON.parse(localStorage.getItem(UNITS_KEY))||{}; }catch(e){ return {}; } }
+function setUnitPref(ex,u){ try{ const m=unitPrefs(); m[ex]=u; localStorage.setItem(UNITS_KEY,JSON.stringify(m)); }catch(e){} }
+function toKg(w,u){ const n=parseFloat(w); return isFinite(n) ? (u==='lb' ? n*KG_PER_LB : n) : NaN; }
+function fromKg(kg,u){ return u==='lb' ? kg/KG_PER_LB : kg; }
+function allRecords(){ return Object.values(LOG); }
+function setVolume(r){ const kg=toKg(r.weight, r.unit||'kg'), x=parseFloat(r.reps); return (isFinite(kg)&&isFinite(x)) ? kg*x : 0; }
+function unitFor(ex){ let best=null; for(const r of allRecords()){ if(r.exercise!==ex) continue; if(!best||r.date>best.date) best=r; } if(best&&best.unit) return best.unit; return unitPrefs()[ex] || 'lb'; }
+function lastWeightDisp(ex,unit){ let best=null; for(const r of allRecords()){ if(r.exercise!==ex) continue; if(!isFinite(parseFloat(r.weight))) continue; if(!best||r.date>best.date) best=r; } if(!best) return null; return Math.round(fromKg(toKg(best.weight,best.unit||'kg'),unit)*10)/10; }
+function sessions(){ const m={}; for(const r of allRecords()){ if(!m[r.date]) m[r.date]={date:r.date,day:r.day,title:r.title,sets:[]}; m[r.date].sets.push(r); } return Object.values(m).sort((a,b)=>a.date<b.date?-1:1); }
+function bestExercise(recs){ const c={}; recs.forEach(r=>{ if(isFinite(parseFloat(r.weight))){ (c[r.exercise]=c[r.exercise]||new Set()).add(r.date); } }); let best=null,bn=0; for(const k in c){ if(c[k].size>bn){ bn=c[k].size; best=k; } } return best; }
+function shortDate(iso){ const p=String(iso).split('-'); const mo=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][(+p[1])-1]||''; return (+p[2])+' '+mo; }
+function fmtK(v){ v=Math.round(v); return v>=1000 ? (v/1000).toFixed(v>=10000?0:1)+'k' : String(v); }
+
+/* --- write --- */
+function saveCell(date,day,title,ex,set,patch){
+  const key=recKey(date,ex,set);
+  const cur=LOG[key] || {date,day,title,exercise:ex,set,weight:'',reps:'',done:false};
+  Object.assign(cur, patch, {date,day,title,exercise:ex,set,ts:Date.now()});
+  const blank=(cur.weight===''||cur.weight==null) && (cur.reps===''||cur.reps==null) && !cur.done;
+  if(blank){ // typed then cleared — drop it locally and from the pending queue; never sync an empty row
+    delete LOG[key]; persist();
+    QUEUE=QUEUE.filter(q=>recKey(q.date,q.exercise,q.set)!==key); persistQ();
+    updateSyncStatus();
+    return;
+  }
+  LOG[key]=cur; persist();
+  queueSync(cur);
+}
+let _flushTimer=null;
+function scheduleFlush(){ if(_flushTimer) clearTimeout(_flushTimer); _flushTimer=setTimeout(()=>{ _flushTimer=null; flushQueue(); }, 800); }
+function queueSync(rec){
+  const key=recKey(rec.date, rec.exercise, rec.set);
+  QUEUE = QUEUE.filter(q=> recKey(q.date,q.exercise,q.set)!==key); // collapse repeated edits of the same set into one pending row
+  QUEUE.push({...rec});
+  persistQ();
+  scheduleFlush();        // debounce the network call; the queue itself is already saved
+}
+
+/* --- Google Sheets (fire-and-forget; no-cors so Apps Script needs no CORS headers) --- */
+function sendRec(rec, url){
+  url=url||getSheetUrl(); if(!url) return Promise.reject(new Error('no url'));
+  const ctrl=(typeof AbortController!=='undefined')?new AbortController():null;
+  const timer=ctrl?setTimeout(()=>ctrl.abort(),15000):null; // never let a stalled send wedge the queue
+  return fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(rec),signal:ctrl?ctrl.signal:undefined})
+    .finally(()=>{ if(timer) clearTimeout(timer); });
+}
+async function flushQueue(){
+  const url=getSheetUrl(); if(!url || flushing || !QUEUE.length) return;
+  flushing=true;
+  try{
+    while(QUEUE.length){
+      const item=QUEUE[0];
+      try{ await sendRec(item, url); }
+      catch(e){ break; }   // offline / unreachable — keep the rest, retry later
+      const i=QUEUE.indexOf(item); if(i>-1) QUEUE.splice(i,1); // identity-safe removal (queue may have been deduped mid-send)
+      persistQ(); updateSyncStatus();
+    }
+  } finally { flushing=false; updateSyncStatus(); }
+}
+function updateSyncStatus(){
+  const el=document.getElementById('syncStat'); if(!el) return;
+  const url=getSheetUrl();
+  el.className='sync-status '+(url ? (QUEUE.length?'warn':'ok') : 'off');
+  el.textContent = url ? (QUEUE.length ? QUEUE.length+' to sync' : 'Connected ✓') : 'Not connected';
+}
+
+/* --- read history back from the sheet (JSONP avoids CORS) so a new device/browser restores everything --- */
+function mergeSheet(payload){
+  const rows=(payload&&payload.rows)||[];
+  let added=0;
+  for(const r of rows){
+    if(!r || !r.date || !r.exercise || r.set===''||r.set==null) continue;
+    const set=String(r.set), key=recKey(String(r.date), r.exercise, set);
+    if(LOG[key]) continue;            // a local copy wins — never clobber this device's own edits
+    LOG[key]={ date:String(r.date), day:r.day||'', title:r.title||'', exercise:r.exercise, set,
+      weight:(r.weight==null?'':r.weight), reps:(r.reps==null?'':r.reps), unit:r.unit||'kg', done:!!r.done, ts:0 };
+    added++;
+  }
+  if(added) persist();
+  return added;
+}
+function pullFromSheet(){
+  return new Promise(resolve=>{
+    const url=getSheetUrl(); if(!url) return resolve(0);
+    const cb='ydgcb_'+Date.now()+'_'+Math.floor(Math.random()*1e6);
+    let done=false;
+    const s=document.createElement('script');
+    const finish=v=>{ if(done) return; done=true; clearTimeout(timer); try{delete window[cb];}catch(e){window[cb]=undefined;} if(s.parentNode) s.parentNode.removeChild(s); resolve(v); };
+    const timer=setTimeout(()=>finish(0), 12000);
+    window[cb]=payload=>finish(mergeSheet(payload));
+    s.onerror=()=>finish(0);
+    s.src=url+(url.indexOf('?')>=0?'&':'?')+'callback='+cb+'&t='+Date.now();
+    document.body.appendChild(s);
+  });
+}
+
+/* --- the per-exercise logging block on each workout card --- */
+function logger(ex, ctx){
+  if(!ctx) return '';
+  const sets=Math.min(3, parseInt(ex.sets,10) || 3); // 3 working sets, then a tear-down
+  const unit=unitFor(ex.name);
+  const lastDisp=lastWeightDisp(ex.name, unit);
+  const wph = lastDisp!=null ? esc(lastDisp) : unit;
+  const mk=(id,label,repPh,extra)=>`<div class="log-row${extra||''}" data-set="${id}">
+      <span class="set-no">${label}</span>
+      <input class="log-w" type="number" inputmode="decimal" step="any" placeholder="${wph}" aria-label="${esc(ex.name)} set ${label} weight"/>
+      <input class="log-r" type="number" inputmode="numeric" placeholder="${repPh}" aria-label="${esc(ex.name)} set ${label} reps"/>
+      <button class="log-done" type="button" aria-label="Mark set ${label} done"></button>
+    </div>`;
+  let rows='';
+  for(let s=1;s<=sets;s++) rows+=mk(String(s), String(s), 'reps', '');
+  rows+=mk('TD', 'TD', 'fail', ' td');
+  return `<div class="logger" data-ex="${esc(ex.name)}" data-day="${esc(ctx.day)}" data-title="${esc(ctx.title)}" data-unit="${unit}">
+    <div class="log-head"><span>Log your sets</span>
+      <span class="unit-toggle" role="group" aria-label="Weight unit">
+        <button type="button" class="unit-btn${unit==='lb'?' on':''}" data-unit="lb">lb</button>
+        <button type="button" class="unit-btn${unit==='kg'?' on':''}" data-unit="kg">kg</button>
+      </span>
+    </div>
+    ${rows}
+  </div>`;
+}
+function hydrateLoggers(){
+  contentEl.querySelectorAll('.logger').forEach(L=>{
+    const ex=L.dataset.ex;
+    L.querySelectorAll('.log-row').forEach(row=>{
+      const r=LOG[recKey(TODAY.iso, ex, row.dataset.set)]; if(!r) return;
+      if(r.weight!=='' && r.weight!=null) row.querySelector('.log-w').value=r.weight;
+      if(r.reps!=='' && r.reps!=null) row.querySelector('.log-r').value=r.reps;
+      if(r.done){ row.classList.add('done'); }
+    });
+  });
+}
+
+/* --- delegated input handling (attached once; survives re-renders) --- */
+function initLog(){
+  contentEl.addEventListener('input', e=>{
+    const t=e.target; const row=t.closest && t.closest('.log-row'); if(!row) return;
+    const L=row.closest('.logger'); const set=row.dataset.set, unit=L.dataset.unit||'kg';
+    if(t.classList.contains('log-w')) saveCell(TODAY.iso,L.dataset.day,L.dataset.title,L.dataset.ex,set,{weight:t.value,unit});
+    else if(t.classList.contains('log-r')) saveCell(TODAY.iso,L.dataset.day,L.dataset.title,L.dataset.ex,set,{reps:t.value,unit});
+  });
+  contentEl.addEventListener('click', e=>{
+    const ub=e.target.closest && e.target.closest('.unit-btn');
+    if(ub){ switchUnit(ub.closest('.logger'), ub.dataset.unit); return; }
+    const btn=e.target.closest && e.target.closest('.log-done'); if(!btn) return;
+    const row=btn.closest('.log-row'), L=row.closest('.logger'), set=row.dataset.set, unit=L.dataset.unit||'kg';
+    const done=!row.classList.contains('done'); row.classList.toggle('done',done);
+    saveCell(TODAY.iso,L.dataset.day,L.dataset.title,L.dataset.ex,set,
+      {done, weight:row.querySelector('.log-w').value, reps:row.querySelector('.log-r').value, unit});
+  });
+  /* number inputs change value on mouse-wheel/trackpad scroll while focused — blur them so scrolling never edits a logged set */
+  contentEl.addEventListener('wheel', ()=>{
+    const a=document.activeElement;
+    if(a && a.tagName==='INPUT' && a.type==='number') a.blur();
+  }, {passive:true});
+  /* retry any pending rows whenever the app comes back online or to the foreground */
+  window.addEventListener('online', flushQueue);
+  window.addEventListener('focus', flushQueue);
+  document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState==='visible') flushQueue(); });
+  flushQueue();
+}
+function switchUnit(L, unit){
+  if(!L || L.dataset.unit===unit) return;
+  L.dataset.unit=unit; setUnitPref(L.dataset.ex, unit);
+  L.querySelectorAll('.unit-btn').forEach(b=>b.classList.toggle('on', b.dataset.unit===unit));
+  const lastDisp=lastWeightDisp(L.dataset.ex, unit);
+  const wph = lastDisp!=null ? String(lastDisp) : unit;
+  L.querySelectorAll('.log-w').forEach(inp=>inp.placeholder=wph);
+  /* re-stamp the unit on any sets already logged today for this exercise (correcting the label, keeping the number) */
+  L.querySelectorAll('.log-row').forEach(row=>{
+    if(LOG[recKey(TODAY.iso, L.dataset.ex, row.dataset.set)])
+      saveCell(TODAY.iso,L.dataset.day,L.dataset.title,L.dataset.ex,row.dataset.set,{unit});
+  });
+}
+
+/* ============================================================
+   SVG CHARTS  (no dependency, theme-matched)
+   ============================================================ */
+function svgLine(pts, color){
+  const w=720,h=260,L=46,R=16,T=16,B=36;
+  const ys=pts.map(p=>p.y); let mn=Math.min(...ys), mx=Math.max(...ys);
+  if(mn===mx){ mn-=1; mx+=1; }
+  const padR=(mx-mn)*0.12; mn=Math.max(0,mn-padR); mx+=padR;
+  const n=pts.length;
+  const X=i=> L + (n<=1 ? (w-L-R)/2 : i*(w-L-R)/(n-1));
+  const Y=v=> T + (1-(v-mn)/(mx-mn))*(h-T-B);
+  let grid='',yl='';
+  for(let t=0;t<=4;t++){ const val=mn+(mx-mn)*t/4, y=Y(val);
+    grid+=`<line x1="${L}" y1="${y.toFixed(1)}" x2="${w-R}" y2="${y.toFixed(1)}" stroke="#2c2c35"/>`;
+    yl+=`<text x="${L-6}" y="${(y+3.5).toFixed(1)}" text-anchor="end" font-size="11" fill="#a1a1aa" font-family="Inter">${Math.round(val)}</text>`; }
+  const coords=pts.map((p,i)=>`${X(i).toFixed(1)},${Y(p.y).toFixed(1)}`);
+  const area=`<polygon points="${X(0).toFixed(1)},${(h-B).toFixed(1)} ${coords.join(' ')} ${X(n-1).toFixed(1)},${(h-B).toFixed(1)}" fill="${color}" opacity="0.09"/>`;
+  const line=`<polyline points="${coords.join(' ')}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`;
+  const step=Math.ceil(n/6); let dots='',xl='';
+  pts.forEach((p,i)=>{ dots+=`<circle cx="${X(i).toFixed(1)}" cy="${Y(p.y).toFixed(1)}" r="3.4" fill="${color}"/>`;
+    if(i%step===0||i===n-1) xl+=`<text x="${X(i).toFixed(1)}" y="${h-12}" text-anchor="middle" font-size="10.5" fill="#a1a1aa" font-family="Inter">${esc(p.label)}</text>`; });
+  return `<div class="chart"><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Progress line chart">${grid}${area}${line}${dots}${yl}${xl}</svg></div>`;
+}
+function svgBars(pts, color){
+  const w=720,h=260,L=46,R=16,T=16,B=36;
+  const mx=Math.max(...pts.map(p=>p.y),1)*1.12, n=pts.length;
+  const bw=Math.min(46,(w-L-R)/n*0.62);
+  const X=i=> L + (i+0.5)*(w-L-R)/n;
+  const Y=v=> T + (1-v/mx)*(h-T-B);
+  let grid='',yl='';
+  for(let t=0;t<=4;t++){ const val=mx*t/4, y=Y(val);
+    grid+=`<line x1="${L}" y1="${y.toFixed(1)}" x2="${w-R}" y2="${y.toFixed(1)}" stroke="#2c2c35"/>`;
+    yl+=`<text x="${L-6}" y="${(y+3.5).toFixed(1)}" text-anchor="end" font-size="11" fill="#a1a1aa" font-family="Inter">${fmtK(val)}</text>`; }
+  const step=Math.ceil(n/6); let bars='',xl='';
+  pts.forEach((p,i)=>{ const y=Y(p.y), x=X(i);
+    bars+=`<rect x="${(x-bw/2).toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(0,h-B-y).toFixed(1)}" rx="3" fill="${color}"/>`;
+    if(i%step===0||i===n-1) xl+=`<text x="${x.toFixed(1)}" y="${h-12}" text-anchor="middle" font-size="10.5" fill="#a1a1aa" font-family="Inter">${esc(p.label)}</text>`; });
+  return `<div class="chart"><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Volume bar chart">${grid}${bars}${yl}${xl}</svg></div>`;
+}
+function exChart(recs, ex){
+  const unit=unitFor(ex);
+  const byDate={};
+  recs.filter(r=>r.exercise===ex).forEach(r=>{ const kg=toKg(r.weight, r.unit||'kg'); if(isFinite(kg)) byDate[r.date]=Math.max(byDate[r.date]||0, kg); });
+  const dates=Object.keys(byDate).sort();
+  if(!dates.length) return `<div class="empty">No weights recorded for this exercise yet.</div>`;
+  return svgLine(dates.map(d=>({label:shortDate(d), y:Math.round(fromKg(byDate[d],unit)*10)/10})), '#edc043');
+}
+
+/* ============================================================
+   RESULTS  /  PROGRESS  VIEW
+   ============================================================ */
+let resultExercise=null;
+function renderResults(doScroll){
+  const recs=allRecords(), sess=sessions();
+  const doneCount=recs.filter(r=>r.done).length;
+  const totalVol=recs.reduce((a,r)=>a+setVolume(r),0);
+  const exWithData=[...new Set(recs.filter(r=>isFinite(parseFloat(r.weight))).map(r=>r.exercise))].sort();
+  if(!resultExercise || !exWithData.includes(resultExercise)) resultExercise = bestExercise(recs) || exWithData[0] || null;
+
+  let body=`<div class="day-head"><span class="daytag">Progress</span><span class="day-title">Your Results</span></div>
+    <div class="day-focus">Everything you log is saved automatically — your sets, weights and progress.</div>
+    <div class="stats">
+      <div class="stat"><div class="v">${sess.length}</div><div class="l">Sessions</div></div>
+      <div class="stat"><div class="v">${doneCount}</div><div class="l">Sets done</div></div>
+      <div class="stat"><div class="v">${fmtK(totalVol)}</div><div class="l">kg lifted</div></div>
+    </div>`;
+
+  if(!recs.length){
+    body+=`<div class="panel"><div class="empty">No sets logged yet.<br>Open today's workout, type the weight &amp; reps and tap ✓ on each set — your charts will build up here automatically. 💪</div></div>`;
+  } else {
+    const volPts=sess.slice(-12).map(s=>({label:shortDate(s.date), y:s.sets.reduce((a,r)=>a+setVolume(r),0)}));
+    body+=`<div class="panel"><h3>Volume per session <small>weight × reps, kg</small></h3>${svgBars(volPts,'#edc043')}</div>`;
+    if(exWithData.length){
+      const opts=exWithData.map(e=>`<option value="${esc(e)}"${e===resultExercise?' selected':''}>${esc(e)}</option>`).join('');
+      const exU=resultExercise?unitFor(resultExercise):'kg';
+      body+=`<div class="panel"><h3>Strength progress <small>top set · ${exU}</small><select class="ex-select" id="exSel">${opts}</select></h3>${exChart(recs,resultExercise)}</div>`;
+    }
+    body+=`<div class="panel"><h3>Recent sessions</h3><div class="sess-list">${
+      sess.slice(-8).reverse().map(s=>{
+        const dn=s.sets.filter(r=>r.done).length, v=s.sets.reduce((a,r)=>a+setVolume(r),0);
+        return `<div class="sess"><span class="s-d">${shortDate(s.date)} · ${esc(s.title)}</span><span class="s-m">${dn} sets · ${fmtK(v)} kg</span></div>`;
+      }).join('')
+    }</div></div>`;
+  }
+
+  contentEl.innerHTML=body;
+  const sel=document.getElementById('exSel');
+  if(sel) sel.onchange=()=>{ resultExercise=sel.value; renderResults(false); };
+  if(doScroll) contentEl.scrollIntoView({behavior:'smooth', block:'start'});
+}
+function exportCsv(){
+  const rows=[['Date','Day','Workout','Exercise','Set','Weight','Unit','Reps','Done']];
+  allRecords().sort((a,b)=> a.date<b.date?-1 : a.date>b.date?1 : String(a.set).localeCompare(String(b.set),undefined,{numeric:true}))
+    .forEach(r=>rows.push([r.date,r.day,r.title,r.exercise,r.set,r.weight,r.unit||'kg',r.reps,r.done]));
+  const csv=rows.map(r=>r.map(c=>`"${String(c==null?'':c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download='yd-gains-log.csv'; a.click(); URL.revokeObjectURL(a.href);
+}
+
 function muscleNames(arr){ return (arr||[]).map(k=>MUS[k]).filter(Boolean); }
 
-function card(ex, n, badge){
+function card(ex, n, badge, logCtx){
   const primNames = muscleNames(ex.prim);
   const secNames  = muscleNames(ex.sec);
   const targetLine = primNames.length ? primNames.join(' · ') : 'General / Mobility';
@@ -424,9 +774,9 @@ function card(ex, n, badge){
       <div class="ex-meta">
         <span class="pill"><b>${ex.sets}</b> sets</span>
         <span class="pill"><b>${ex.reps}</b> reps</span>
-        ${ex.load ? `<span class="pill"><b>${ex.load}</b></span>` : ``}
       </div>
       <ol class="steps">${ex.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+      ${logCtx ? logger(ex, logCtx) : ``}
     </div>
   </div>`;
 }
@@ -452,12 +802,12 @@ function renderDay(i, doScroll){
     </div>
 
     <div class="section-label"><span class="dot"></span>Warm-Up — do this first</div>
-    <div class="warm-intro">${w.note}</div>
     <div class="cards">${w.items.map((e,idx)=>card(e, idx+1, 'Warm-up')).join('')}</div>
 
     <div class="section-label"><span class="dot"></span>Workout — 6 exercises</div>
-    <div class="cards">${d.exercises.map((e,idx)=>card(e, idx+1)).join('')}</div>
+    <div class="cards">${d.exercises.map((e,idx)=>card(e, idx+1, null, {day:d.day, title:d.title})).join('')}</div>
   `;
+  hydrateLoggers();
   if(doScroll) contentEl.scrollIntoView({behavior:'smooth', block:'start'});
 }
 
@@ -466,11 +816,16 @@ function istToday(){
   const now = new Date();
   const weekday = new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Kolkata',weekday:'long'}).format(now);
   const dateStr = new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(now);
+  const iso = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit'}).format(now); // YYYY-MM-DD
   const map = {Monday:0,Tuesday:1,Wednesday:2,Thursday:3,Friday:4,Saturday:5};
   const idx = map[weekday];
-  return { idx: idx===undefined?0:idx, isRest: weekday==='Sunday', weekday, dateStr };
+  return { idx: idx===undefined?0:idx, isRest: weekday==='Sunday', weekday, dateStr, iso };
 }
 const TODAY = istToday();
+
+/* which view is on screen — so we can refresh it after the sheet read-back lands */
+let activeView={type:'day', idx:0};
+function rerenderCurrent(){ if(activeView.type==='progress') renderResults(false); else renderDay(activeView.idx, false); }
 
 const tabBtns = [];
 DAYS.forEach((d,i)=>{
@@ -481,19 +836,39 @@ DAYS.forEach((d,i)=>{
   b.onclick = ()=>{
     document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));
     b.classList.add('active');
+    activeView={type:'day', idx:i};
     renderDay(i, true);
   };
   tabsEl.appendChild(b);
   tabBtns.push(b);
 });
 
+/* Progress / results tab */
+const progBtn=document.createElement('button');
+progBtn.className='tab-btn prog-tab';
+progBtn.innerHTML=`📊<small>Progress</small>`;
+progBtn.onclick=()=>{
+  document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));
+  progBtn.classList.add('active');
+  activeView={type:'progress'};
+  renderResults(true);
+};
+tabsEl.appendChild(progBtn);
+
+/* Wire up set-logging (delegated, attached once) and sync any pending rows */
+initLog();
+
 /* Auto-open today's session (Sunday falls back to Monday) */
 const startIdx = TODAY.isRest ? 0 : TODAY.idx;
+activeView={type:'day', idx:startIdx};
 tabBtns[startIdx].classList.add('active');
 renderDay(startIdx, false);
 
 document.getElementById('todayLine').textContent =
   (TODAY.isRest ? 'Sunday · Rest Day' : TODAY.dateStr) + ' · IST';
+
+/* Pull history back from the sheet, then refresh the view so last-used weights and graphs appear */
+pullFromSheet().then(added=>{ if(added) rerenderCurrent(); });
 
 /* Centre today's tab in the horizontally-scrolling row (mobile) */
 requestAnimationFrame(()=>{
