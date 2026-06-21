@@ -93,8 +93,6 @@
   .section-label::after{content:"";flex:1;height:1px;background:var(--line)}
   .section-label .dot{width:9px;height:9px;border-radius:50%;background:var(--gold)}
 
-  .warm-intro{background:var(--bg-2);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:12px;padding:16px 18px;color:var(--muted);font-size:14px;margin-bottom:18px;line-height:1.6}
-  .warm-intro b{color:var(--text)}
 
   .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:.18s ease;display:flex;flex-direction:column}
@@ -110,7 +108,6 @@
   .map.full{flex:none;width:auto;max-width:100%;border:none;background:none}
   .demo-cap{position:absolute;bottom:5px;left:0;right:0;text-align:center;font-size:8.5px;letter-spacing:1.5px;color:#6b6b73;text-transform:uppercase;font-family:'Oswald',sans-serif;font-weight:600;pointer-events:none}
   .exnum{position:absolute;top:10px;left:10px;width:30px;height:30px;border-radius:8px;background:var(--gold);color:#1a1a1a;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;z-index:2}
-  .badge{position:absolute;top:10px;right:10px;font-size:10px;letter-spacing:.5px;text-transform:uppercase;background:rgba(0,0,0,.55);color:var(--gold-soft);padding:4px 8px;border-radius:6px;border:1px solid var(--line);z-index:2}
   .card-body{padding:15px 16px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
   .ex-name{font-family:'Oswald';font-size:19px;font-weight:600;line-height:1.2}
   .ex-target{font-size:12px;color:var(--gold-soft);text-transform:uppercase;letter-spacing:.6px;font-weight:600}
@@ -188,17 +185,6 @@
   .sess{display:flex;justify-content:space-between;align-items:center;background:var(--card-2);border:1px solid var(--line);border-radius:10px;padding:10px 13px;font-size:14px}
   .sess .s-d{font-family:'Oswald',sans-serif;letter-spacing:.5px}
   .sess .s-m{color:var(--muted);font-size:12.5px}
-  .sync-card{background:var(--bg-2);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:14px;padding:16px;margin-top:16px}
-  .sync-row{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:14px;margin-bottom:11px}
-  .sync-status{font-size:12.5px;font-weight:600;white-space:nowrap}
-  .sync-status.ok{color:#3fb950}.sync-status.warn{color:#e0a93f}.sync-status.off{color:var(--muted)}
-  .sync-card input{width:100%;background:var(--card-2);border:1px solid var(--line);border-radius:9px;color:var(--text);padding:10px;font-size:13px;font-family:'Inter',sans-serif;margin-bottom:10px}
-  .sync-card input:focus{outline:none;border-color:var(--gold)}
-  .sync-actions{display:flex;gap:8px;flex-wrap:wrap}
-  .sync-actions button{background:var(--card-2);border:1px solid var(--line);color:var(--text);border-radius:9px;padding:9px 13px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
-  .sync-actions button.primary{background:linear-gradient(180deg,var(--gold),#b8932b);color:#1a1a1a;border-color:var(--gold)}
-  .sync-help{font-size:12px;color:var(--muted);margin-top:11px;line-height:1.55}
-  .sync-help b{color:var(--gold-soft);font-weight:600}
   .prog-tab.active{background:linear-gradient(180deg,var(--gold-soft),var(--gold));}
 
   footer{text-align:center;color:var(--muted);font-size:13px;margin-top:46px;padding:24px 18px 0;border-top:1px solid var(--line);max-width:1120px;margin-left:auto;margin-right:auto}
@@ -312,137 +298,98 @@ function fig(prim, sec){
 }
 
 /* ============================================================
-   WARM-UPS  (per training type)
-   ============================================================ */
-const WARMUPS = {
-  push:{
-    note:"<b>5 min</b> easy cardio to raise body temp, then the mobility + ramp-up sets below. Warm shoulders, elbows and chest before you press heavy — never take your first hard set cold.",
-    items:[
-      {name:"Treadmill / Bike",sets:"5 min",reps:"easy",prim:[],sec:["quad","hamstring","calf"],steps:["Light pace until you break a sweat and breathe a little harder."]},
-      {name:"Band Pull-Apart + Arm Circles",sets:"2",reps:"15",prim:["rdelt"],sec:["sdelt","trap"],steps:["Wake up the rear delts and rotator cuff before pressing."]},
-      {name:"Push-Ups",sets:"2",reps:"10–12",prim:["pec"],sec:["triceps","fdelt"],steps:["Slow, controlled reps to prime the chest and triceps."]},
-      {name:"Empty Bar Bench Press",sets:"1",reps:"15",prim:["pec"],sec:["fdelt","triceps"],steps:["Just the 20 kg bar — groove your exact bar path."]},
-      {name:"Ramp-Up Set 1",sets:"1",reps:"8",prim:["pec"],sec:["fdelt","triceps"],steps:["≈ 50% of your working weight."]},
-      {name:"Ramp-Up Set 2",sets:"1",reps:"5",prim:["pec"],sec:["fdelt","triceps"],steps:["≈ 70% of working weight, then start your work sets."]},
-    ],
-  },
-  legs:{
-    note:"<b>5 min</b> on the bike, then open the hips, knees and ankles. Legs need the most thorough warm-up — ramp the squat in stages so your first heavy set feels strong.",
-    items:[
-      {name:"Stationary Bike",sets:"5 min",reps:"moderate",prim:[],sec:["quad","hamstring","calf"],steps:["Get blood into the quads and hamstrings."]},
-      {name:"Bodyweight Squats",sets:"2",reps:"15",prim:["quad","glute"],sec:["hamstring"],steps:["Full depth, knees tracking over your toes."]},
-      {name:"Leg Swings",sets:"2",reps:"12 / leg",prim:["hamstring","glute"],sec:["quad"],steps:["Front-to-back and side-to-side to loosen the hips."]},
-      {name:"Empty Bar Squat",sets:"1",reps:"12",prim:["quad","glute"],sec:["hamstring","lowerback"],steps:["Just the bar (20 kg) — rehearse depth and brace."]},
-      {name:"Ramp-Up Set 1",sets:"1",reps:"8",prim:["quad","glute"],sec:["hamstring"],steps:["≈ 50% of working weight."]},
-      {name:"Ramp-Up Set 2",sets:"1",reps:"5",prim:["quad","glute"],sec:["hamstring"],steps:["≈ 70%, then begin your work sets."]},
-    ],
-  },
-  pull:{
-    note:"<b>5 min</b> cardio, then activate the lats and upper back so you pull with your back — not just your arms. Light work protects the lower back on rows.",
-    items:[
-      {name:"Rower / Bike",sets:"5 min",reps:"easy",prim:[],sec:["lat","quad","hamstring"],steps:["The rowing machine doubles as a back primer."]},
-      {name:"Band Pull-Apart",sets:"2",reps:"15",prim:["rdelt"],sec:["trap"],steps:["Squeeze the shoulder blades together each rep."]},
-      {name:"Scapular Pulls (dead hang)",sets:"2",reps:"10",prim:["lat"],sec:["trap"],steps:["From a hang, pull shoulders down — no elbow bend."]},
-      {name:"Light Lat Pulldown",sets:"1",reps:"15",prim:["lat"],sec:["biceps"],steps:["Feel the lats stretch at the top and contract at the bottom."]},
-      {name:"Ramp-Up Set 1",sets:"1",reps:"8",prim:["lat"],sec:["biceps","rdelt"],steps:["≈ 50% of your first lift's working weight."]},
-      {name:"Ramp-Up Set 2",sets:"1",reps:"5",prim:["lat"],sec:["biceps","rdelt"],steps:["≈ 70%, then start your work sets."]},
-    ],
-  },
-};
-
-/* ============================================================
    WORKOUT — 36 UNIQUE EXERCISES (no movement repeats in a week)
    ============================================================ */
 const DAYS = [
   { day:"Monday", type:"push", title:"Push A", focus:"Chest · Shoulders · Triceps — strength focus",
     exercises:[
-      {name:"Barbell Bench Press",sets:"3",reps:"6–8",load:"32–40 kg",prim:["pec"],sec:["fdelt","triceps"],
-        steps:["Lie flat, eyes under the bar, grip just wider than shoulders.","Pull shoulder blades back & down, plant your feet.","Lower the bar to mid-chest, then press up and slightly back."]},
-      {name:"Incline Dumbbell Press",sets:"3",reps:"8–10",load:"12–16 kg ×2",prim:["pec","fdelt"],sec:["triceps"],
-        steps:["Set the bench to 30°, dumbbells at shoulder level.","Press up and slightly together — don't clank them.","Lower under control into a deep stretch."]},
-      {name:"Seated Dumbbell Shoulder Press",sets:"3",reps:"8–10",load:"10–14 kg ×2",prim:["fdelt"],sec:["sdelt","triceps"],
-        steps:["Sit upright, back on the pad, dumbbells at ear height.","Press overhead without locking out hard.","Keep ribs down — don't arch the lower back."]},
-      {name:"Cable Lateral Raise",sets:"3",reps:"12–15",load:"2.5–5 kg",prim:["sdelt"],sec:[],
-        steps:["Stand side-on to a low pulley, cable across your body.","Lead with the elbow, raise to shoulder height.","Lower slowly — no swinging."]},
-      {name:"Triceps Rope Pushdown",sets:"3",reps:"10–12",load:"15–25 kg",prim:["triceps"],sec:[],
-        steps:["Pin your elbows to your sides, grab the rope.","Push down and spread the rope apart at the bottom.","Control it back up to about 90°."]},
-      {name:"Overhead Dumbbell Triceps Extension",sets:"3",reps:"10–12",load:"8–12 kg",prim:["triceps"],sec:[],
-        steps:["Hold one dumbbell overhead with both hands.","Lower it behind your head for a deep stretch.","Extend fully, keeping elbows pointing forward."]},
+      {name:"Flat Barbell Bench Press",sets:"3",reps:"6–8",load:"40–60 lb bar",prim:["pec"],sec:["fdelt","triceps"],
+        steps:["Lie flat on the bench, eyes under the bar, grip just wider than shoulders.","Pull your shoulder blades back & down and plant your feet.","Lower the bar to mid-chest, then press up and slightly back."]},
+      {name:"Incline Barbell Press",sets:"3",reps:"8–10",load:"30–50 lb bar",prim:["pec","fdelt"],sec:["triceps"],
+        steps:["Set the incline bench, grip slightly wider than shoulders.","Lower the bar to your upper chest, elbows about 45°.","Drive up and slightly back, over your face."]},
+      {name:"Shoulder Press Machine",sets:"3",reps:"8–10",load:"machine",prim:["fdelt"],sec:["sdelt","triceps"],
+        steps:["Set the seat so the handles sit at shoulder height.","Press straight overhead without locking out hard.","Lower under control to ear level — keep ribs down."]},
+      {name:"Lateral Raise Machine",sets:"3",reps:"12–15",load:"machine",prim:["sdelt"],sec:[],
+        steps:["Sit tall, pads against your outer forearms/elbows.","Lead with the elbows and raise to shoulder height.","Lower slowly — no jerking the stack up."]},
+      {name:"Tricep Press Machine",sets:"3",reps:"10–12",load:"machine",prim:["triceps"],sec:[],
+        steps:["Set the seat, grab the handles, elbows pinned at your sides.","Press down/forward until your arms are fully straight.","Squeeze the triceps, then return to about 90°."]},
+      {name:"Overhead Dumbbell Triceps Extension",sets:"3",reps:"10–12",load:"20–35 lb",prim:["triceps"],sec:[],
+        steps:["Hold one dumbbell overhead with both hands.","Lower it behind your head for a deep stretch.","Extend fully, keeping your elbows pointing forward."]},
     ]},
-  { day:"Tuesday", type:"legs", title:"Legs A", focus:"Quads · Hamstrings · Calves — squat focus",
+  { day:"Tuesday", type:"legs", title:"Legs A", focus:"Quads · Hamstrings · Calves + Forearms — machine focus",
     exercises:[
-      {name:"Barbell Back Squat",sets:"3",reps:"6–8",load:"40–50 kg",prim:["quad","glute"],sec:["hamstring","lowerback"],
-        steps:["Bar on your upper traps, feet shoulder-width, toes slightly out.","Brace your core and sit your hips down between your knees.","Hit at least parallel, then drive up through mid-foot."]},
-      {name:"Leg Press",sets:"3",reps:"10–12",load:"machine",prim:["quad"],sec:["glute","hamstring"],
-        steps:["Feet mid-platform, shoulder-width, back flat on the pad.","Lower until knees reach ~90° — don't let hips curl.","Press through your heels; don't lock the knees hard."]},
-      {name:"Romanian Deadlift",sets:"3",reps:"8–10",load:"30–40 kg",prim:["hamstring","glute"],sec:["lowerback"],
-        steps:["Bar at your hips, soft knees, flat back.","Push your hips back, keeping the bar close.","Feel the hamstring stretch, then drive the hips forward."]},
-      {name:"Leg Extension",sets:"3",reps:"12–15",load:"machine",prim:["quad"],sec:[],
+      {name:"Leg Press Machine",sets:"3",reps:"8–10",load:"machine",prim:["quad","glute"],sec:["hamstring"],
+        steps:["Feet mid-platform, shoulder-width, back flat on the pad.","Lower until knees reach about 90° — don't let your hips curl.","Press through your heels; don't lock the knees out hard."]},
+      {name:"Leg Extension Machine",sets:"3",reps:"12–15",load:"machine",prim:["quad"],sec:[],
         steps:["Pad on your lower shins, knees at the seat pivot.","Extend to straight and squeeze your quads at the top.","Lower slowly under control."]},
-      {name:"Seated Leg Curl",sets:"3",reps:"12–15",load:"machine",prim:["hamstring"],sec:[],
+      {name:"Seated Leg Curl Machine",sets:"3",reps:"12–15",load:"machine",prim:["hamstring"],sec:[],
         steps:["Pad on your lower calves, thighs strapped down.","Curl your heels under the seat to a full contraction.","Return slowly — don't let the stack drop."]},
-      {name:"Standing Calf Raise",sets:"3",reps:"15–20",load:"machine",prim:["calf"],sec:[],
-        steps:["Balls of feet on the platform, shoulders under the pads.","Drop your heels for a full stretch.","Rise as high as possible and pause at the top."]},
+      {name:"Calf Raise Machine",sets:"3",reps:"15–20",load:"machine",prim:["calf"],sec:[],
+        steps:["Balls of your feet on the platform, shoulders under the pads.","Drop your heels for a full stretch at the bottom.","Rise as high as possible and pause at the top."]},
+      {name:"Seated Dumbbell Wrist Curl",sets:"3",reps:"15–20",load:"15–25 lb ×2",prim:["forearm"],sec:[],
+        steps:["Sit with forearms on your thighs, palms up, wrists past your knees.","Let the dumbbells roll to your fingertips for a stretch.","Curl them up by flexing only your wrists."]},
+      {name:"Dumbbell Reverse Wrist Curl",sets:"3",reps:"15–20",load:"8–15 lb ×2",prim:["forearm"],sec:[],
+        steps:["Same seated position but with your palms facing down.","Let the wrists drop fully under control.","Lift the backs of your hands up by extending the wrists."]},
     ]},
   { day:"Wednesday", type:"pull", title:"Pull A", focus:"Back · Rear Delts · Biceps — width focus",
     exercises:[
       {name:"Lat Pulldown",sets:"3",reps:"8–10",load:"machine",prim:["lat"],sec:["biceps","rdelt"],
-        steps:["Grip wider than shoulders, thighs under the pads.","Pull the bar to your upper chest, driving elbows down.","Control it back up to a full overhead stretch."]},
-      {name:"Barbell Bent-Over Row",sets:"3",reps:"8–10",load:"30–40 kg",prim:["lat","trap"],sec:["biceps","lowerback"],
-        steps:["Hinge to ~45° with a flat back, bar at your shins.","Pull to your belly button, elbows driving back.","Lower under control, keeping the back braced."]},
-      {name:"Seated Cable Row",sets:"3",reps:"10–12",load:"machine",prim:["lat","trap"],sec:["biceps"],
-        steps:["Chest tall, slight knee bend, grab the handle.","Pull to your stomach and squeeze the shoulder blades.","Don't heave with the lower back."]},
-      {name:"Face Pull",sets:"3",reps:"15",load:"light cable",prim:["rdelt"],sec:["trap"],
-        steps:["Rope at face height, thumbs pointing back.","Pull toward your forehead with elbows high.","Squeeze the rear delts, then return slowly."]},
-      {name:"Dumbbell Bicep Curl",sets:"3",reps:"10–12",load:"8–12 kg",prim:["biceps"],sec:["forearm"],
+        steps:["Grip wider than your shoulders, thighs under the pads.","Pull the bar to your upper chest, driving your elbows down.","Control it back up to a full overhead stretch."]},
+      {name:"Assisted Pull-Ups",sets:"3",reps:"6–10",load:"assist machine",prim:["lat"],sec:["biceps"],
+        steps:["Set the assist weight, grip wider than your shoulders.","From a full hang, pull your chin over the bar.","Lower all the way down under control."]},
+      {name:"Seated Row Machine",sets:"3",reps:"10–12",load:"machine",prim:["lat","trap"],sec:["biceps","rdelt"],
+        steps:["Chest on the pad, grab the handles, arms extended.","Row back, squeezing your shoulder blades together.","No body swing — the pad keeps it strict."]},
+      {name:"Rear Deltoid Machine",sets:"3",reps:"15",load:"machine",prim:["rdelt"],sec:["trap"],
+        steps:["Face the pad, arms forward at shoulder height on the handles.","Sweep the arms back in a wide arc, leading with the elbows.","Squeeze the rear delts, then return slowly."]},
+      {name:"Dumbbell Bicep Curl",sets:"3",reps:"10–12",load:"15–25 lb ×2",prim:["biceps"],sec:["forearm"],
         steps:["Stand tall, arms at your sides, palms forward.","Curl up without swinging your elbows.","Squeeze at the top, then lower slowly."]},
-      {name:"Hammer Curl",sets:"3",reps:"10–12",load:"8–12 kg",prim:["biceps","forearm"],sec:[],
-        steps:["Neutral grip — palms facing each other.","Curl up keeping the wrists straight.","Lower with a 2-count, no swinging."]},
+      {name:"Hammer Curl",sets:"3",reps:"10–12",load:"15–25 lb ×2",prim:["biceps","forearm"],sec:[],
+        steps:["Neutral grip — palms facing each other.","Curl up keeping your wrists straight.","Lower with a 2-count, no swinging."]},
     ]},
   { day:"Thursday", type:"push", title:"Push B", focus:"Chest · Shoulders · Triceps — hypertrophy focus",
     exercises:[
-      {name:"Incline Barbell Press",sets:"3",reps:"8–10",load:"25–32 kg",prim:["pec","fdelt"],sec:["triceps"],
-        steps:["Bench at 30°, grip slightly wider than shoulders.","Lower the bar to your upper chest, elbows ~45°.","Drive up and slightly back, over your face."]},
-      {name:"Flat Dumbbell Press",sets:"3",reps:"10–12",load:"14–18 kg ×2",prim:["pec"],sec:["fdelt","triceps"],
-        steps:["Lie flat, dumbbells over your chest, feet planted.","Lower to chest level for a full stretch.","Press up, squeezing the chest at the top."]},
+      {name:"Decline Barbell Press",sets:"3",reps:"8–10",load:"40–60 lb bar",prim:["pec"],sec:["triceps","fdelt"],
+        steps:["Lie on the decline bench, feet hooked, grip just wider than shoulders.","Lower the bar to your lower chest.","Press up and slightly back over your lower chest."]},
+      {name:"Chest Press Machine",sets:"3",reps:"10–12",load:"machine",prim:["pec"],sec:["fdelt","triceps"],
+        steps:["Set the seat so the handles are at mid-chest height.","Press forward until your arms are nearly straight.","Lower under control to a full chest stretch."]},
       {name:"Pec Dec Machine Fly",sets:"3",reps:"12–15",load:"machine",prim:["pec"],sec:["fdelt"],
         steps:["Set the seat so the handles are at chest height.","With a slight elbow bend, bring the handles together.","Pause and squeeze, then open slowly."]},
-      {name:"Dumbbell Lateral Raise",sets:"3",reps:"12–15",load:"4–7 kg",prim:["sdelt"],sec:[],
+      {name:"Seated Dumbbell Shoulder Press",sets:"3",reps:"8–10",load:"25–40 lb ×2",prim:["fdelt"],sec:["sdelt","triceps"],
+        steps:["Sit upright, back on the pad, dumbbells at ear height.","Press overhead without locking out hard.","Keep your ribs down — don't arch the lower back."]},
+      {name:"Dumbbell Lateral Raise",sets:"3",reps:"12–15",load:"10–20 lb ×2",prim:["sdelt"],sec:[],
         steps:["Stand tall, light dumbbells at your sides.","Raise out to shoulder height, pinkies slightly up.","Lower slowly — control beats heavy here."]},
       {name:"Assisted Chest Dips",sets:"3",reps:"8–12",load:"assist machine",prim:["pec","triceps"],sec:["fdelt"],
-        steps:["Set the assist pad, grip the bars, arms locked out.","Lean forward and lower until shoulders are ~parallel.","Press back up — more forward lean hits more chest."]},
-      {name:"EZ-Bar Skull Crusher",sets:"3",reps:"10–12",load:"15–20 kg",prim:["triceps"],sec:[],
-        steps:["Lie flat, EZ-bar over your forehead, elbows tucked in.","Bend at the elbows, lowering toward your hairline.","Extend back up without flaring the elbows out."]},
+        steps:["Set the assist pad, grip the bars, arms locked out.","Lean forward and lower until your shoulders are ~parallel.","Press back up — more forward lean hits more chest."]},
     ]},
-  { day:"Friday", type:"legs", title:"Legs B", focus:"Quads · Glutes · Hamstrings — machine & unilateral focus",
+  { day:"Friday", type:"legs", title:"Legs B", focus:"Quads · Glutes · Hamstrings + Forearms — free-weight focus",
     exercises:[
-      {name:"Hack Squat Machine",sets:"3",reps:"8–10",load:"machine",prim:["quad"],sec:["glute"],
-        steps:["Shoulders under the pads, feet mid-platform.","Lower under control to a ~90° knee bend.","Push through the whole foot; don't lock out hard."]},
-      {name:"Walking Dumbbell Lunges",sets:"3",reps:"10–12 / leg",load:"8–12 kg ×2",prim:["quad","glute"],sec:["hamstring"],
+      {name:"Linear Leg Press Machine",sets:"3",reps:"10–12",load:"machine",prim:["quad"],sec:["glute","hamstring"],
+        steps:["Sit back into the seat, feet mid-platform, shoulder-width.","Push the platform away until your legs are nearly straight.","Lower under control to about a 90° knee bend."]},
+      {name:"Dumbbell Romanian Deadlift",sets:"3",reps:"8–10",load:"30–50 lb ×2",prim:["hamstring","glute"],sec:["lowerback"],
+        steps:["Hold the dumbbells at your hips, soft knees, flat back.","Push your hips back, sliding the dumbbells down your thighs.","Feel the hamstring stretch, then drive your hips forward."]},
+      {name:"Hip Abduction Machine",sets:"3",reps:"15–20",load:"machine",prim:["glute"],sec:[],
+        steps:["Sit back, knees against the outer pads.","Push your knees apart as wide as comfortable.","Squeeze the glutes, then return slowly under control."]},
+      {name:"Dumbbell Walking Lunges",sets:"3",reps:"10–12 / leg",load:"20–35 lb ×2",prim:["quad","glute"],sec:["hamstring"],
         steps:["Dumbbells at your sides, torso tall.","Step forward and drop the back knee toward the floor.","Push through the front heel into the next step."]},
-      {name:"Bulgarian Split Squat",sets:"3",reps:"10 / leg",load:"6–10 kg ×2",prim:["quad","glute"],sec:["hamstring"],
-        steps:["Rear foot on a bench, front foot well ahead.","Lower straight down, front knee over mid-foot.","Drive up through the front heel."]},
-      {name:"Lying Leg Curl",sets:"3",reps:"10–12",load:"machine",prim:["hamstring"],sec:[],
-        steps:["Lie face down, pad on your lower calves.","Curl your heels toward your glutes, hips pressed down.","Lower with a slow 3-second negative."]},
-      {name:"Barbell Hip Thrust",sets:"3",reps:"10–12",load:"30–40 kg",prim:["glute"],sec:["hamstring"],
-        steps:["Upper back on a bench, padded bar over your hips.","Drive your hips up and squeeze the glutes hard.","Lower under control, keeping ribs down."]},
-      {name:"Seated Calf Raise",sets:"3",reps:"15–20",load:"machine",prim:["calf"],sec:[],
-        steps:["Pad over your knees, balls of feet on the platform.","Drop your heels for a deep stretch.","Press up, pause and squeeze the calves."]},
+      {name:"Barbell Wrist Curl",sets:"3",reps:"15–20",load:"20–40 lb bar",prim:["forearm"],sec:[],
+        steps:["Sit with forearms on your thighs, palms up, holding the bar past your knees.","Let the bar roll to your fingertips for a stretch.","Curl it up by flexing only your wrists."]},
+      {name:"Dumbbell Reverse Curl",sets:"3",reps:"10–12",load:"15–25 lb ×2",prim:["forearm","biceps"],sec:[],
+        steps:["Stand tall, palms facing down (overhand grip).","Curl up keeping your wrists firm and elbows pinned.","Lower slowly — this hits the top of the forearm."]},
     ]},
   { day:"Saturday", type:"pull", title:"Pull B", focus:"Back · Rear Delts · Biceps — thickness focus",
     exercises:[
-      {name:"Assisted Pull-Ups",sets:"3",reps:"6–10",load:"assist machine",prim:["lat"],sec:["biceps"],
-        steps:["Set the assist weight, grip wider than your shoulders.","From a full hang, pull your chin over the bar.","Lower all the way down under control."]},
-      {name:"Chest-Supported Row",sets:"3",reps:"10–12",load:"machine",prim:["lat","trap"],sec:["biceps","rdelt"],
-        steps:["Chest on the pad, grab the handles.","Row back, squeezing your shoulder blades together.","No body swing — the pad keeps it strict."]},
-      {name:"Single-Arm Dumbbell Row",sets:"3",reps:"10–12 / arm",load:"14–20 kg",prim:["lat"],sec:["biceps","trap"],
-        steps:["One knee and hand on the bench, flat back.","Row the dumbbell to your hip, elbow close.","Get a full stretch at the bottom each rep."]},
-      {name:"Straight-Arm Pulldown",sets:"3",reps:"12–15",load:"light cable",prim:["lat"],sec:[],
-        steps:["Stand tall, arms nearly straight on the bar.","Sweep the bar down to your thighs using the lats.","Control it back up to a stretch."]},
-      {name:"Cable Bicep Curl",sets:"3",reps:"12–15",load:"15–22 kg",prim:["biceps"],sec:["forearm"],
-        steps:["Low pulley, elbows pinned to your sides.","Curl up with constant cable tension.","Never let the stack rest between reps."]},
-      {name:"Preacher Curl Machine",sets:"3",reps:"10–12",load:"machine",prim:["biceps"],sec:[],
+      {name:"Barbell Bent-Over Row",sets:"3",reps:"8–10",load:"40–60 lb bar",prim:["lat","trap"],sec:["biceps","lowerback"],
+        steps:["Hinge to about 45° with a flat back, bar at your shins.","Pull to your belly button, elbows driving back.","Lower under control, keeping the back braced."]},
+      {name:"Pull Down Machine",sets:"3",reps:"10–12",load:"machine",prim:["lat"],sec:["biceps"],
+        steps:["Use a close / neutral grip, thighs under the pads.","Pull the handles to your collarbone, elbows tight to your sides.","Control the stretch back up to full length."]},
+      {name:"Seated Cable Row",sets:"3",reps:"10–12",load:"machine",prim:["lat","trap"],sec:["biceps"],
+        steps:["Chest tall, slight knee bend, grab the handle.","Pull to your stomach and squeeze the shoulder blades.","Don't heave with the lower back."]},
+      {name:"Face Pull",sets:"3",reps:"15",load:"light cable",prim:["rdelt"],sec:["trap"],
+        steps:["Rope at face height on the dual pulley, thumbs pointing back.","Pull toward your forehead with your elbows high.","Squeeze the rear delts, then return slowly."]},
+      {name:"Bicep Curl Machine",sets:"3",reps:"12–15",load:"machine",prim:["biceps"],sec:[],
         steps:["Arms on the pad, armpits at the top edge.","Curl up, squeeze, and don't fully relax at the bottom.","Lower slowly to protect the elbows."]},
+      {name:"EZ-Bar Curl",sets:"3",reps:"10–12",load:"20–40 lb bar",prim:["biceps"],sec:["forearm"],
+        steps:["Hold the curl bar on the angled grips, elbows at your sides.","Curl up to your chest without swinging.","Squeeze, then lower slowly to a full stretch."]},
     ]},
 ];
 
@@ -452,7 +399,52 @@ const DAYS = [
 const tabsEl = document.getElementById('tabs');
 const contentEl = document.getElementById('content');
 
-const IMG = {"Barbell Bench Press":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Barbell_Bench_Press_-_Medium_Grip/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Barbell_Bench_Press_-_Medium_Grip/1.jpg"],"Incline Dumbbell Press":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Incline_Dumbbell_Press/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Incline_Dumbbell_Press/1.jpg"],"Seated Dumbbell Shoulder Press":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dumbbell_Shoulder_Press/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dumbbell_Shoulder_Press/1.jpg"],"Cable Lateral Raise":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Cable_Seated_Lateral_Raise/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Cable_Seated_Lateral_Raise/1.jpg"],"Triceps Rope Pushdown":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Triceps_Pushdown_-_Rope_Attachment/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Triceps_Pushdown_-_Rope_Attachment/1.jpg"],"Overhead Dumbbell Triceps Extension":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Standing_Dumbbell_Triceps_Extension/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Standing_Dumbbell_Triceps_Extension/1.jpg"],"Barbell Back Squat":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Barbell_Full_Squat/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Barbell_Full_Squat/1.jpg"],"Leg Press":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Leg_Press/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Leg_Press/1.jpg"],"Romanian Deadlift":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Romanian_Deadlift/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Romanian_Deadlift/1.jpg"],"Leg Extension":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Leg_Extensions/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Leg_Extensions/1.jpg"],"Seated Leg Curl":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Seated_Leg_Curl/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Seated_Leg_Curl/1.jpg"],"Standing Calf Raise":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Standing_Calf_Raises/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Standing_Calf_Raises/1.jpg"],"Lat Pulldown":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Wide-Grip_Lat_Pulldown/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Wide-Grip_Lat_Pulldown/1.jpg"],"Barbell Bent-Over Row":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Bent_Over_Barbell_Row/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Bent_Over_Barbell_Row/1.jpg"],"Seated Cable Row":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Seated_Cable_Rows/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Seated_Cable_Rows/1.jpg"],"Face Pull":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Face_Pull/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Face_Pull/1.jpg"],"Dumbbell Bicep Curl":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dumbbell_Bicep_Curl/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dumbbell_Bicep_Curl/1.jpg"],"Hammer Curl":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Hammer_Curls/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Hammer_Curls/1.jpg"],"Incline Barbell Press":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Barbell_Incline_Bench_Press_-_Medium_Grip/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Barbell_Incline_Bench_Press_-_Medium_Grip/1.jpg"],"Flat Dumbbell Press":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dumbbell_Bench_Press/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dumbbell_Bench_Press/1.jpg"],"Pec Dec Machine Fly":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Butterfly/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Butterfly/1.jpg"],"Dumbbell Lateral Raise":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Side_Lateral_Raise/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Side_Lateral_Raise/1.jpg"],"Assisted Chest Dips":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dips_-_Chest_Version/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dips_-_Chest_Version/1.jpg"],"EZ-Bar Skull Crusher":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/EZ-Bar_Skullcrusher/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/EZ-Bar_Skullcrusher/1.jpg"],"Hack Squat Machine":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Hack_Squat/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Hack_Squat/1.jpg"],"Walking Dumbbell Lunges":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dumbbell_Lunges/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dumbbell_Lunges/1.jpg"],"Bulgarian Split Squat":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Split_Squat_with_Dumbbells/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Split_Squat_with_Dumbbells/1.jpg"],"Lying Leg Curl":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Lying_Leg_Curls/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Lying_Leg_Curls/1.jpg"],"Barbell Hip Thrust":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Barbell_Hip_Thrust/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Barbell_Hip_Thrust/1.jpg"],"Seated Calf Raise":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Seated_Calf_Raise/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Seated_Calf_Raise/1.jpg"],"Assisted Pull-Ups":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Band_Assisted_Pull-Up/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Band_Assisted_Pull-Up/1.jpg"],"Chest-Supported Row":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dumbbell_Incline_Row/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Dumbbell_Incline_Row/1.jpg"],"Single-Arm Dumbbell Row":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/One-Arm_Dumbbell_Row/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/One-Arm_Dumbbell_Row/1.jpg"],"Straight-Arm Pulldown":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Straight-Arm_Pulldown/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Straight-Arm_Pulldown/1.jpg"],"Cable Bicep Curl":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Standing_Biceps_Cable_Curl/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Standing_Biceps_Cable_Curl/1.jpg"],"Preacher Curl Machine":["https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Machine_Preacher_Curls/0.jpg","https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/Machine_Preacher_Curls/1.jpg"]};
+const EXDB='https://cdn.jsdelivr.net/gh/yuhonas/free-exercise-db@main/exercises/';
+function exImg(folder){ return [EXDB+folder+'/0.jpg', EXDB+folder+'/1.jpg']; }
+const IMG = {
+  /* ---- Push A ---- */
+  "Flat Barbell Bench Press": exImg("Barbell_Bench_Press_-_Medium_Grip"),
+  "Incline Barbell Press": exImg("Barbell_Incline_Bench_Press_-_Medium_Grip"),
+  "Shoulder Press Machine": exImg("Machine_Shoulder_Military_Press"),
+  "Lateral Raise Machine": ["assets/lateral-raise-machine.png","assets/lateral-raise-machine.png"],
+  "Tricep Press Machine": ["assets/tricep-press-machine.png","assets/tricep-press-machine.png"],
+  "Overhead Dumbbell Triceps Extension": exImg("Standing_Dumbbell_Triceps_Extension"),
+  /* ---- Legs A ---- */
+  "Leg Press Machine": exImg("Leg_Press"),
+  "Leg Extension Machine": exImg("Leg_Extensions"),
+  "Seated Leg Curl Machine": exImg("Seated_Leg_Curl"),
+  "Calf Raise Machine": exImg("Standing_Calf_Raises"),
+  "Seated Dumbbell Wrist Curl": exImg("Seated_Dumbbell_Palms-Up_Wrist_Curl"),
+  "Dumbbell Reverse Wrist Curl": exImg("Seated_Dumbbell_Palms-Down_Wrist_Curl"),
+  /* ---- Pull A ---- */
+  "Lat Pulldown": exImg("Wide-Grip_Lat_Pulldown"),
+  "Assisted Pull-Ups": exImg("Band_Assisted_Pull-Up"),
+  "Seated Row Machine": exImg("Leverage_Iso_Row"),
+  "Rear Deltoid Machine": exImg("Reverse_Machine_Flyes"),
+  "Dumbbell Bicep Curl": exImg("Dumbbell_Bicep_Curl"),
+  "Hammer Curl": exImg("Hammer_Curls"),
+  /* ---- Push B ---- */
+  "Decline Barbell Press": exImg("Decline_Barbell_Bench_Press"),
+  "Chest Press Machine": exImg("Leverage_Chest_Press"),
+  "Pec Dec Machine Fly": exImg("Butterfly"),
+  "Seated Dumbbell Shoulder Press": exImg("Dumbbell_Shoulder_Press"),
+  "Dumbbell Lateral Raise": exImg("Side_Lateral_Raise"),
+  "Assisted Chest Dips": exImg("Dips_-_Chest_Version"),
+  /* ---- Legs B ---- */
+  "Linear Leg Press Machine": exImg("Narrow_Stance_Leg_Press"),
+  "Dumbbell Romanian Deadlift": exImg("Stiff-Legged_Dumbbell_Deadlift"),
+  "Hip Abduction Machine": exImg("Thigh_Abductor"),
+  "Dumbbell Walking Lunges": exImg("Dumbbell_Lunges"),
+  "Barbell Wrist Curl": exImg("Seated_Palm-Up_Barbell_Wrist_Curl"),
+  "Dumbbell Reverse Curl": exImg("Standing_Dumbbell_Reverse_Curl"),
+  /* ---- Pull B ---- */
+  "Barbell Bent-Over Row": exImg("Bent_Over_Barbell_Row"),
+  "Pull Down Machine": exImg("Close-Grip_Front_Lat_Pulldown"),
+  "Seated Cable Row": exImg("Seated_Cable_Rows"),
+  "Face Pull": exImg("Face_Pull"),
+  "Bicep Curl Machine": exImg("Machine_Bicep_Curl"),
+  "EZ-Bar Curl": exImg("EZ-Bar_Curl"),
+};
 
 /* ============================================================
    SET LOG  +  GOOGLE SHEETS SYNC  +  PROGRESS CHARTS
@@ -497,7 +489,6 @@ function saveCell(date,day,title,ex,set,patch){
   if(blank){ // typed then cleared — drop it locally and from the pending queue; never sync an empty row
     delete LOG[key]; persist();
     QUEUE=QUEUE.filter(q=>recKey(q.date,q.exercise,q.set)!==key); persistQ();
-    updateSyncStatus();
     return;
   }
   LOG[key]=cur; persist();
@@ -530,15 +521,9 @@ async function flushQueue(){
       try{ await sendRec(item, url); }
       catch(e){ break; }   // offline / unreachable — keep the rest, retry later
       const i=QUEUE.indexOf(item); if(i>-1) QUEUE.splice(i,1); // identity-safe removal (queue may have been deduped mid-send)
-      persistQ(); updateSyncStatus();
+      persistQ();
     }
-  } finally { flushing=false; updateSyncStatus(); }
-}
-function updateSyncStatus(){
-  const el=document.getElementById('syncStat'); if(!el) return;
-  const url=getSheetUrl();
-  el.className='sync-status '+(url ? (QUEUE.length?'warn':'ok') : 'off');
-  el.textContent = url ? (QUEUE.length ? QUEUE.length+' to sync' : 'Connected ✓') : 'Not connected';
+  } finally { flushing=false; }
 }
 
 /* --- read history back from the sheet (JSONP avoids CORS) so a new device/browser restores everything --- */
@@ -741,19 +726,9 @@ function renderResults(doScroll){
   if(sel) sel.onchange=()=>{ resultExercise=sel.value; renderResults(false); };
   if(doScroll) contentEl.scrollIntoView({behavior:'smooth', block:'start'});
 }
-function exportCsv(){
-  const rows=[['Date','Day','Workout','Exercise','Set','Weight','Unit','Reps','Done']];
-  allRecords().sort((a,b)=> a.date<b.date?-1 : a.date>b.date?1 : String(a.set).localeCompare(String(b.set),undefined,{numeric:true}))
-    .forEach(r=>rows.push([r.date,r.day,r.title,r.exercise,r.set,r.weight,r.unit||'kg',r.reps,r.done]));
-  const csv=rows.map(r=>r.map(c=>`"${String(c==null?'':c).replace(/"/g,'""')}"`).join(',')).join('\n');
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
-  a.download='yd-gains-log.csv'; a.click(); URL.revokeObjectURL(a.href);
-}
-
 function muscleNames(arr){ return (arr||[]).map(k=>MUS[k]).filter(Boolean); }
 
-function card(ex, n, badge, logCtx){
+function card(ex, n, logCtx){
   const primNames = muscleNames(ex.prim);
   const secNames  = muscleNames(ex.sec);
   const targetLine = primNames.length ? primNames.join(' · ') : 'General / Mobility';
@@ -764,7 +739,6 @@ function card(ex, n, badge, logCtx){
   <div class="card">
     <div class="thumb">
       <span class="exnum">${n}</span>
-      ${badge ? `<span class="badge">${badge}</span>` : ``}
       ${demo}${map}
     </div>
     <div class="card-body">
@@ -783,7 +757,6 @@ function card(ex, n, badge, logCtx){
 
 function renderDay(i, doScroll){
   const d = DAYS[i];
-  const w = WARMUPS[d.type];
   const isToday = !TODAY.isRest && i===TODAY.idx;
   const restBanner = (TODAY.isRest && i===0)
     ? `<div class="rest-banner">😴 Today is <b>Sunday</b> — your scheduled rest day. Showing <b>Monday · Push A</b> so you're ready for tomorrow.</div>` : '';
@@ -801,11 +774,8 @@ function renderDay(i, doScroll){
       <span><i class="sw-i"></i>Not targeted</span>
     </div>
 
-    <div class="section-label"><span class="dot"></span>Warm-Up — do this first</div>
-    <div class="cards">${w.items.map((e,idx)=>card(e, idx+1, 'Warm-up')).join('')}</div>
-
     <div class="section-label"><span class="dot"></span>Workout — 6 exercises</div>
-    <div class="cards">${d.exercises.map((e,idx)=>card(e, idx+1, null, {day:d.day, title:d.title})).join('')}</div>
+    <div class="cards">${d.exercises.map((e,idx)=>card(e, idx+1, {day:d.day, title:d.title})).join('')}</div>
   `;
   hydrateLoggers();
   if(doScroll) contentEl.scrollIntoView({behavior:'smooth', block:'start'});
